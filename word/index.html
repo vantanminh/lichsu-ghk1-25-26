@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Office Online Viewer Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        background: #0f172a;
+        font-family: system-ui, sans-serif;
+        color: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      #controls {
+        display: flex;
+        gap: 8px;
+        padding: 8px;
+        background: #1e293b;
+        align-items: center;
+      }
+      input {
+        flex: 1;
+        padding: 6px 8px;
+        border-radius: 6px;
+        border: 1px solid #475569;
+        background: #0f172a;
+        color: white;
+      }
+      button {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #38bdf8;
+        color: #0f172a;
+        cursor: pointer;
+      }
+      iframe {
+        flex: 1;
+        width: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="controls">
+      <input
+        id="fileUrl"
+        placeholder="https://example.com/file.docx"
+      />
+      <button id="loadBtn">Xem file</button>
+    </div>
+    <iframe id="viewer"></iframe>
+
+    <script>
+      const input = document.getElementById("fileUrl");
+      const btn = document.getElementById("loadBtn");
+      const frame = document.getElementById("viewer");
+
+      btn.addEventListener("click", () => {
+        const url = input.value.trim();
+        if (!url) return alert("Nhập URL file .docx trước đã!");
+        const office = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}`;
+        frame.src = office;
+      });
+
+      // ví dụ mặc định
+      input.value =
+        "https://file-examples.com/storage/fe3cc57b6d70801db5b38a3/2017/02/file-sample_100kB.docx";
+      btn.click();
+    </script>
+  </body>
+</html>
