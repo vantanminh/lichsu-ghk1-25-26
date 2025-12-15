@@ -3,71 +3,433 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ôn Luyện Đề Thi Lịch Sử - Cập nhật mới</title>
+    <title>Ôn Luyện Lịch Sử - Nâng cao</title>
+    
+    <!-- Google Fonts: Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f9; margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background-color: #fff; padding: 25px 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
-        h1, h2 { color: #0056b3; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
-        .controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 25px; padding: 15px; background-color: #e7f3ff; border-left: 5px solid #0056b3; border-radius: 5px; }
-        .mode-selector label { margin-right: 15px; font-weight: 500; cursor: pointer; }
-        .mode-selector input[type="radio"] { margin-right: 5px; }
-        .reset-btn { padding: 8px 15px; font-size: 1em; font-weight: bold; color: #fff; background-color: #28a745; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
-        .reset-btn:hover { background-color: #218838; }
-        .question-block { margin-bottom: 2em; padding-bottom: 1.5em; border-bottom: 1px dashed #ccc; }
-        .question-block p { margin-top: 0; font-weight: bold; }
-        .q-number { margin-right: 8px; }
-        .options label { display: block; margin: 0.5em 0; padding: 10px; border-radius: 5px; border: 1px solid #ddd; cursor: pointer; transition: all 0.2s; }
-        .tf-options .options-wrapper { margin-bottom: 10px; }
-        .tf-options label { display: inline-block; width: 80px; text-align: center; margin-left: 15px; }
-        .options label:hover { background-color: #f0f8ff; border-color: #007bff; }
-        .options input[type="radio"] { margin-right: 10px; }
-        .submit-btn { display: block; width: 100%; padding: 15px; font-size: 1.2em; font-weight: bold; color: #fff; background-color: #007bff; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }
-        .submit-btn:hover { background-color: #0056b3; }
-        #results { margin-top: 30px; padding: 20px; border-radius: 8px; background-color: #f9f9f9; border: 2px solid #007bff; }
-        .hidden { display: none; }
-        .option-prefix { font-weight: bold; margin-right: 8px; }
-        /* Feedback Styles */
-        .final-correct, .show-correct-answer { background-color: #d4edda !important; border-color: #155724 !important; }
-        .final-incorrect, .immediate-incorrect { background-color: #f8d7da !important; border-color: #721c24 !important; }
-        .immediate-correct { background-color: #d1ecf1 !important; border-color: #0c5460 !important; }
+        :root {
+            --primary-color: #4f46e5; /* Indigo */
+            --primary-light: #e0e7ff;
+            --secondary-color: #64748b;
+            --success-color: #10b981; /* Emerald */
+            --success-bg: #d1fae5;
+            --error-color: #ef4444; /* Red */
+            --error-bg: #fee2e2;
+            --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: var(--background-gradient);
+            color: #1e293b;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #1e293b;
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+        }
+
+        /* Controls Panel */
+        .controls-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Mode Switcher Styling */
+        .mode-selector {
+            display: flex;
+            background: #f1f5f9;
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .mode-selector label {
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+
+        .mode-selector input[type="radio"] {
+            display: none;
+        }
+
+        .mode-selector label:has(input:checked) {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reset-btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        .reset-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            margin: 40px 0 20px 0;
+            font-weight: 700;
+            background: linear-gradient(90deg, rgba(79, 70, 229, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Question Cards */
+        .question-block {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease;
+        }
+        
+        /* .question-block:hover {
+            transform: translateY(-3px);
+        } */
+
+        .question-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .q-number {
+            color: var(--primary-color);
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        /* Options Grid */
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .options label:hover {
+            border-color: var(--primary-color);
+            background-color: #f8fafc;
+        }
+
+        .options input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            margin-right: 15px;
+            flex-shrink: 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .options input[type="radio"]:checked {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .option-prefix {
+            font-weight: 700;
+            margin-right: 8px;
+            color: var(--secondary-color);
+        }
+
+        /* True/False Specifics */
+        .tf-options .options-wrapper {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tf-statement {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .tf-choices {
+            display: flex;
+            gap: 15px;
+        }
+
+        .tf-choices label {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .tf-choices input {
+            display: none; 
+        }
+
+        .tf-choices label:has(input:checked) {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Feedback Styles - The Important Part */
+        /* Correct */
+        .options label.immediate-correct,
+        .options label.final-correct,
+        .tf-choices label.final-correct,
+        .options input[type="radio"]:checked + .option-prefix + span + .immediate-correct { 
+            /* Note: Selector complexity handled via JS adding classes to parent label usually */
+        }
+        
+        .options label.immediate-correct,
+        .options label.final-correct,
+        .show-correct-answer {
+            background-color: var(--success-bg) !important;
+            border-color: var(--success-color) !important;
+            color: #065f46;
+        }
+
+        /* Incorrect */
+        .options label.immediate-incorrect,
+        .options label.final-incorrect,
+        .tf-choices label.final-incorrect {
+            background-color: var(--error-bg) !important;
+            border-color: var(--error-color) !important;
+            color: #991b1b;
+        }
+        
+        /* Shake Animation for wrong answers */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .immediate-incorrect {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 18px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #4338ca 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 25px -5px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Results Box */
+        #results {
+            margin-top: 40px;
+            padding: 30px;
+            border-radius: 20px;
+            background: white;
+            border: 2px solid var(--primary-color);
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        #results h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        #total-score {
+            font-size: 2rem;
+            color: #1e293b;
+            margin: 20px 0;
+        }
+
+        .score-detail {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin: 5px 0;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden { display: none !important; }
+
+        /* Media Queries */
+        @media (max-width: 600px) {
+            .controls-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .mode-selector {
+                width: 100%;
+                justify-content: center;
+            }
+            .reset-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .question-block {
+                padding: 15px;
+            }
+            h1 { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Ôn luyện đề thi Lịch sử</h1>
+        <header>
+            <h1>Ôn Luyện Lịch Sử</h1>
+            <p style="color: #64748b; font-weight: 500;">Hệ thống câu hỏi trắc nghiệm & nâng cao</p>
+        </header>
         
-        <div class="controls">
+        <div class="controls-card">
             <div class="mode-selector">
-                <label><input type="radio" name="mode" value="practice" checked> Luyện tập</label>
-                <label><input type="radio" name="mode" value="test"> Thi</label>
+                <label>
+                    <input type="radio" name="mode" value="practice" checked> 
+                    <span>📚 Luyện tập</span>
+                </label>
+                <label>
+                    <input type="radio" name="mode" value="test"> 
+                    <span>⏱️ Thi thử</span>
+                </label>
             </div>
-            <button type="button" class="reset-btn">Làm lại (Xáo trộn)</button>
+            <button type="button" class="reset-btn">
+                <span>🔄</span> Trộn đề & Làm lại
+            </button>
         </div>
 
         <form id="quizForm">
             <div id="part1-container">
-                <h2><strong>I. TRẮC NGHIỆM NHIỀU LỰA CHỌN</strong></h2>
+                <div class="section-title">PHẦN I. TRẮC NGHIỆM NHIỀU LỰA CHỌN</div>
                 <div id="mc-questions-container">
-                    <!-- Các câu hỏi trắc nghiệm nhiều lựa chọn sẽ được JS chèn vào đây -->
+                    <!-- JS Injects here -->
                 </div>
             </div>
 
             <div id="part2-container">
-                <h2><strong>II. TRẮC NGHIỆM ĐÚNG – SAI</strong></h2>
+                <div class="section-title">PHẦN II. TRẮC NGHIỆM ĐÚNG – SAI</div>
                 <div id="tf-questions-container">
-                    <!-- Các câu hỏi Đúng-Sai sẽ được JS chèn vào đây -->
+                    <!-- JS Injects here -->
                 </div>
             </div>
             
-            <button type="submit" class="submit-btn hidden">Nộp bài</button>
+            <button type="submit" class="submit-btn hidden">NỘP BÀI THI</button>
         </form>
 
         <div id="results" class="hidden">
-            <h2>Kết quả bài thi</h2>
-            <p id="score-mc"></p>
-            <p id="score-tf" class="hidden"></p>
-            <p id="total-score" style="font-weight: bold; font-size: 1.2em;"></p>
+            <h2>🏆 Kết Quả Bài Thi</h2>
+            <div id="total-score" style="font-weight: 800;"></div>
+            <p id="score-mc" class="score-detail"></p>
+            <p id="score-tf" class="score-detail hidden"></p>
+            <button type="button" class="reset-btn" style="margin: 20px auto;" onclick="document.querySelector('.reset-btn').click()">Làm lại bài</button>
         </div>
     </div>
 
@@ -107,7 +469,7 @@
             { q: "Sự kiện nào đánh dấu chủ nghĩa xã hội đã vượt ra khỏi phạm vi một nước (Liên Xô) và bước đầu trở thành hệ thống thế giới?", a: "A", o: { A: "Sự ra đời các nước dân chủ nhân dân Đông Âu.", B: "Sự ra đời nước Cộng hòa Nhân dân Trung Hoa.", C: "Sự ra đời của nước Cộng hòa Ấn Độ.", D: "Sự ra đời nước Cộng hòa Cuba." } },
             { q: "Năm 1991, sự kiện nào dưới đây có tác động lớn tới hệ thống XHCN?", a: "A", o: { A: "CNXH sụp đổ ở Liên Xô.", B: "CNXH bắt đầu lâm vào khủng hoảng.", C: "Việt Nam tiến hành đường lối đổi mới", D: "Trung Quốc tiến hành cải cách." } }
         ],
-        tf: [] // Không có dữ liệu Đúng/Sai trong đề mới
+        tf: [] 
     };
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -122,12 +484,11 @@
 
         let currentMode = 'practice';
 
-        // Ẩn phần 2 nếu không có dữ liệu
         if (quizData.tf.length === 0) {
             part2Container.style.display = 'none';
         }
 
-        // Fisher-Yates shuffle algorithm
+        // Fisher-Yates shuffle
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -140,7 +501,7 @@
             mcContainer.innerHTML = '';
             tfContainer.innerHTML = '';
 
-            // Shuffle and create MC questions
+            // Shuffle and create MC
             const shuffledMC = shuffle([...quizData.mc]);
             shuffledMC.forEach((qData, index) => {
                 const questionDiv = document.createElement('div');
@@ -149,9 +510,10 @@
                 const questionName = `q${index}`;
                 questionDiv.dataset.name = questionName;
 
-                const questionText = document.createElement('p');
-                questionText.innerHTML = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
-                questionDiv.appendChild(questionText);
+                const questionHeader = document.createElement('div');
+                questionHeader.className = 'question-header';
+                questionHeader.innerHTML = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
+                questionDiv.appendChild(questionHeader);
 
                 const optionsDiv = document.createElement('div');
                 optionsDiv.className = 'options';
@@ -159,7 +521,13 @@
                 const optionKeys = shuffle(Object.keys(qData.o));
                 optionKeys.forEach(key => {
                     const label = document.createElement('label');
-                    label.innerHTML = `<input type="radio" name="${questionName}" value="${key}"> <span class="option-prefix"></span> ${qData.o[key]}`;
+                    // Removed span option-prefix from innerHTML to add via CSS/JS logic if needed, 
+                    // but here we keep structure for styling
+                    label.innerHTML = `
+                        <input type="radio" name="${questionName}" value="${key}"> 
+                        <span class="option-prefix"></span> 
+                        <span>${qData.o[key]}</span>
+                    `;
                     optionsDiv.appendChild(label);
                 });
 
@@ -167,15 +535,17 @@
                 mcContainer.appendChild(questionDiv);
             });
 
-            // Shuffle and create TF questions (Nếu có)
+            // Shuffle and create TF
             if (quizData.tf.length > 0) {
                 const shuffledTF = shuffle([...quizData.tf]);
                 shuffledTF.forEach((qData, qIndex) => {
                     const questionDiv = document.createElement('div');
                     questionDiv.className = 'question-block tf-options';
-                    const questionText = document.createElement('p');
-                    questionText.innerHTML = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
-                    questionDiv.appendChild(questionText);
+                    
+                    const questionHeader = document.createElement('div');
+                    questionHeader.className = 'question-header';
+                    questionHeader.innerHTML = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
+                    questionDiv.appendChild(questionHeader);
                     
                     qData.s.forEach((statement, sIndex) => {
                         const wrapper = document.createElement('div');
@@ -184,10 +554,12 @@
                         wrapper.dataset.name = name;
                         wrapper.dataset.answer = statement.a;
                         
-                        const statementText = `<span>${String.fromCharCode(97 + sIndex)}) ${statement.t}</span>`;
+                        const statementText = `<div class="tf-statement"><span>${String.fromCharCode(97 + sIndex)})</span> ${statement.t}</div>`;
                         wrapper.innerHTML = `${statementText}
-                            <label><input type="radio" name="${name}" value="Đúng"> Đúng</label>
-                            <label><input type="radio" name="${name}" value="Sai"> Sai</label>`;
+                            <div class="tf-choices">
+                                <label><input type="radio" name="${name}" value="Đúng"> Đúng</label>
+                                <label><input type="radio" name="${name}" value="Sai"> Sai</label>
+                            </div>`;
                         questionDiv.appendChild(wrapper);
                     });
                     tfContainer.appendChild(questionDiv);
@@ -199,15 +571,13 @@
         
         function updateNumbersAndLabels() {
             let globalQuestionIndex = 1;
-            // Renumber all questions
             document.querySelectorAll('.question-block').forEach(qBlock => {
                 qBlock.querySelector('.q-number').textContent = `Câu ${globalQuestionIndex++}:`;
             });
             
-            // Relabel MC options
             document.querySelectorAll('#mc-questions-container .options').forEach(optionsDiv => {
                 optionsDiv.querySelectorAll('label').forEach((label, index) => {
-                    label.querySelector('.option-prefix').textContent = `${String.fromCharCode(65 + index)}.`;
+                    label.querySelector('.option-prefix').textContent = `${String.fromCharCode(65 + index)}`;
                 });
             });
         }
@@ -215,12 +585,26 @@
         function checkAnswerImmediately(event) {
             if (currentMode !== 'practice') return;
             const selectedInput = event.target;
-            const parentWrapper = selectedInput.closest('.question-block, .options-wrapper');
-            const correctAnswer = parentWrapper.dataset.answer;
+            
+            // Determine if it's MC or TF
+            const isTF = selectedInput.closest('.tf-choices') !== null;
+            
+            let parentWrapper, correctAnswer, selectedLabel;
+
+            if (isTF) {
+                parentWrapper = selectedInput.closest('.options-wrapper');
+                selectedLabel = selectedInput.parentElement;
+            } else {
+                parentWrapper = selectedInput.closest('.question-block');
+                selectedLabel = selectedInput.parentElement;
+            }
+
+            correctAnswer = parentWrapper.dataset.answer;
             const userAnswer = selectedInput.value;
             const name = parentWrapper.dataset.name;
             const questionInputs = parentWrapper.querySelectorAll(`input[name="${name}"]`);
-            const selectedLabel = selectedInput.parentElement;
+            
+            // Reset classes first if needed (though inputs are disabled after one click)
             
             if (userAnswer === correctAnswer) {
                 selectedLabel.classList.add('immediate-correct');
@@ -228,14 +612,22 @@
                 selectedLabel.classList.add('immediate-incorrect');
             }
             
-            // Find and show correct answer
-            parentWrapper.querySelectorAll('input').forEach(input => {
-                if(input.value === correctAnswer) {
-                    input.parentElement.classList.add('show-correct-answer');
-                }
-            });
-            
-            questionInputs.forEach(input => input.disabled = true);
+            // Show correct answer
+            if (isTF) {
+                 parentWrapper.querySelectorAll('input').forEach(input => {
+                    if(input.value === correctAnswer) {
+                        input.parentElement.classList.add('show-correct-answer');
+                    }
+                    input.disabled = true;
+                });
+            } else {
+                parentWrapper.querySelectorAll('.options input').forEach(input => {
+                    if(input.value === correctAnswer) {
+                        input.parentElement.classList.add('show-correct-answer');
+                    }
+                    input.disabled = true;
+                });
+            }
         }
 
         function setupListenersForMode() {
@@ -244,11 +636,11 @@
                 document.querySelectorAll('input[type="radio"]:not([name="mode"])').forEach(input => {
                     input.addEventListener('change', checkAnswerImmediately);
                 });
-            } else { // Test mode
+            } else {
                 submitBtn.classList.remove('hidden');
-                // Remove immediate listeners
-                 document.querySelectorAll('input[type="radio"]:not([name="mode"])').forEach(input => {
+                document.querySelectorAll('input[type="radio"]:not([name="mode"])').forEach(input => {
                     input.removeEventListener('change', checkAnswerImmediately);
+                    input.disabled = false; // Ensure enabled
                 });
             }
         }
@@ -258,6 +650,7 @@
             resultsDiv.classList.add('hidden');
             createQuiz();
             setupListenersForMode();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         modeRadios.forEach(radio => {
@@ -282,6 +675,10 @@
             document.querySelectorAll('#mc-questions-container .question-block').forEach(q => {
                 const correctAnswer = q.dataset.answer;
                 const userInput = q.querySelector('input:checked');
+                
+                // Disable all inputs
+                q.querySelectorAll('input').forEach(i => i.disabled = true);
+
                 if (userInput) {
                     const userLabel = userInput.parentElement;
                     if (userInput.value === correctAnswer) {
@@ -289,8 +686,13 @@
                         userLabel.classList.add('final-correct');
                     } else {
                         userLabel.classList.add('final-incorrect');
-                        q.querySelector(`input[value="${correctAnswer}"]`).parentElement.classList.add('final-correct');
+                        // Show correct
+                         q.querySelector(`input[value="${correctAnswer}"]`).parentElement.classList.add('final-correct');
                     }
+                } else {
+                    // Show correct answer even if not selected
+                     const correctInput = q.querySelector(`input[value="${correctAnswer}"]`);
+                     if(correctInput) correctInput.parentElement.classList.add('show-correct-answer');
                 }
             });
 
@@ -298,30 +700,37 @@
             document.querySelectorAll('#tf-questions-container .options-wrapper').forEach(item => {
                 const correctAnswer = item.dataset.answer;
                 const userInput = item.querySelector('input:checked');
+                
+                 item.querySelectorAll('input').forEach(i => i.disabled = true);
+
                 if (userInput) {
                     if (userInput.value === correctAnswer) {
                         scoreTF++;
                         userInput.parentElement.classList.add('final-correct');
                     } else {
                         userInput.parentElement.classList.add('final-incorrect');
+                        // Highlight correct
+                        item.querySelector(`input[value="${correctAnswer}"]`).parentElement.classList.add('final-correct');
                     }
                 }
             });
 
-            document.getElementById('score-mc').textContent = `Phần I (Nhiều lựa chọn): Đúng ${scoreMC} / ${totalMC} câu.`;
+            document.getElementById('score-mc').innerHTML = `🔹 Phần I (Trắc nghiệm): <strong>${scoreMC} / ${totalMC}</strong> câu.`;
             
             const tfResult = document.getElementById('score-tf');
             if(totalTF > 0) {
-                tfResult.textContent = `Phần II (Đúng - Sai): Đúng ${scoreTF} / ${totalTF} ý.`;
+                tfResult.innerHTML = `🔸 Phần II (Đúng - Sai): <strong>${scoreTF} / ${totalTF}</strong> ý.`;
                 tfResult.classList.remove('hidden');
                 document.getElementById('total-score').textContent = `Tổng điểm: ${scoreMC + scoreTF} / ${totalMC + totalTF}`;
             } else {
                  tfResult.classList.add('hidden');
-                 document.getElementById('total-score').textContent = `Tổng điểm: ${scoreMC} / ${totalMC}`;
+                 document.getElementById('total-score').textContent = `Điểm số: ${scoreMC} / ${totalMC}`;
             }
 
             resultsDiv.classList.remove('hidden');
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
         });
 
         // Initial setup
