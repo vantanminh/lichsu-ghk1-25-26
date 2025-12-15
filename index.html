@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ôn Luyện Đề Thi Lịch Sử (Nâng cao)</title>
+    <title>Ôn Luyện Đề Thi Lịch Sử - Cập nhật mới</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f9; margin: 0; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; background-color: #fff; padding: 25px 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
@@ -46,14 +46,18 @@
         </div>
 
         <form id="quizForm">
-            <h2><strong>I. TRẮC NGHIỆM NHIỀU LỰA CHỌN</strong></h2>
-            <div id="mc-questions-container">
-                <!-- Các câu hỏi trắc nghiệm nhiều lựa chọn sẽ được JS chèn vào đây -->
+            <div id="part1-container">
+                <h2><strong>I. TRẮC NGHIỆM NHIỀU LỰA CHỌN</strong></h2>
+                <div id="mc-questions-container">
+                    <!-- Các câu hỏi trắc nghiệm nhiều lựa chọn sẽ được JS chèn vào đây -->
+                </div>
             </div>
 
-            <h2><strong>II. TRẮC NGHIỆM ĐÚNG – SAI</strong></h2>
-            <div id="tf-questions-container">
-                <!-- Các câu hỏi Đúng-Sai sẽ được JS chèn vào đây -->
+            <div id="part2-container">
+                <h2><strong>II. TRẮC NGHIỆM ĐÚNG – SAI</strong></h2>
+                <div id="tf-questions-container">
+                    <!-- Các câu hỏi Đúng-Sai sẽ được JS chèn vào đây -->
+                </div>
             </div>
             
             <button type="submit" class="submit-btn hidden">Nộp bài</button>
@@ -62,7 +66,7 @@
         <div id="results" class="hidden">
             <h2>Kết quả bài thi</h2>
             <p id="score-mc"></p>
-            <p id="score-tf"></p>
+            <p id="score-tf" class="hidden"></p>
             <p id="total-score" style="font-weight: bold; font-size: 1.2em;"></p>
         </div>
     </div>
@@ -70,89 +74,58 @@
     <script>
     const quizData = {
         mc: [
-            { q: "“<em>Lật đổ chế độ phong kiến đứng đầu là vua Sác- lơ I...</em>” là mục tiêu của cuộc cách mạng tư sản ở quốc gia nào sau đây?", a: "C", o: { A: "Nga.", B: "Pháp.", C: "Anh.", D: "Bắc Mỹ." } },
-            { q: "Ở nước Anh... Nhiều quý tộc chuyển hướng kinh doanh... trở thành tầng lớp", a: "D", o: { A: "tư sản.", B: "chủ nô.", C: "quý tộc phong kiến.", D: "quý tộc mới." } },
-            { q: "Đầu thế kỉ XVII, ngành công nghiệp phát triển nhất ở nước Anh là", a: "C", o: { A: "luyện kim.", B: "máy hơi nước.", C: "len dạ.", D: "chế tạo máy móc." } },
-            { q: "Đến giữa thế kỉ XVIII, khu vực miền Bắc của 13 bang thuộc địa Anh ở Bắc Mĩ phổ biến phát triển", a: "B", o: { A: "kinh tế đồn điền.", B: "công trường thủ công.", C: "dệt và làm gốm.", D: "phường hội thủ công." } },
-            { q: "Khẩu hiệu nổi tiếng của bản Tuyên ngôn Nhân quyền và Dân quyền trong Cách mạng tư sản Pháp năm 1789 là", a: "D", o: { A: "“đề cao quyền tự do của con người”.", B: "“Độc lập – Tự do – Hạnh phúc”.", C: "“bảo vệ quyền lợi của giai cấp tư sản”.", D: "“Tự do – Bình đẳng – Bác ái”." } },
-            { q: "Một trong những nhiệm vụ của các cuộc cách mạng tư sản từ giữa thế kỉ XVI đến đầu thế kỉ XX là", a: "A", o: { A: "xóa bỏ chế độ phong kiến chuyên chế.", B: "xóa bỏ triệt để mâu thuẫn trong xã hội.", C: "đưa giai cấp công nhân lên nắm quyền.", D: "xác lập sự thống trị của chủ nghĩa thực dân." } },
-            { q: "Động lực quyết định thắng lợi của các cuộc cách mạng tư sản từ giữa thế kỉ XVI đến đầu thế kỉ XX là", a: "B", o: { A: "phương pháp đấu tranh.", B: "quần chúng nhân dân.", C: "kết quả cuối cùng.", D: "mục tiêu cách mạng." } },
-            { q: "Nội dung nào sau đây là tiền đề về mặt tư tưởng của cuộc cách mạng tư sản ở nước Pháp thế kỉ XVIII?", a: "A", o: { A: "Triết học Ánh sáng.", B: "Cải cách tôn giáo.", C: "Văn hóa Phục hưng.", D: "Khởi nghĩa nông dân." } },
-            { q: "Nội dung nào sau đây <strong>không phải</strong> là mục tiêu của các cuộc cách mạng tư sản thế kỉ XVI - XVIII?", a: "D", o: { A: "Lật đổ chế độ phong kiến, thực dân cùng tàn tích của nó.", B: "Tạo điều kiện cho sự phát triển của kinh tế tư bản chủ nghĩa.", C: "Thiết lập nền thống trị của giai cấp tư sản và liên minh của họ.", D: "Mở ra thời đại thời đại thắng lợi của chế độ xã hội chủ nghĩa." } },
-            { q: "Các cuộc cách mạng tư sản thời cận đại đều", a: "A", o: { A: "dẫn đến xác lập quan hệ sản xuất tư bản chủ nghĩa.", B: "tạo ra một nền dân chủ, tự do thực sự, rộng rãi.", C: "lật đổ chế độ phong kiến, thiết lập nền cộng hòa.", D: "lật đổ chế độ thực dân, thiết lập nền cộng hòa." } },
-            { q: "Điểm khác biệt về đặc điểm kinh tế nước Anh so với nước Pháp trước khi bùng nổ cách mạng tư sản (thế kỉ XVII-XVIII) là", a: "A", o: { A: "nền nông nghiệp phát triển.", B: "nền công nghiệp phát triển.", C: "ngoại thương phát triển.", D: "nền nông nghiệp lạc hậu." } },
-            { q: "Quần chúng nhân dân có vai trò nào sau đây trong các cuộc cách mạng tư sản thời cận đại?", a: "D", o: { A: "Bị giai cấp tư sản lợi dụng, không được hưởng quyền lợi.", B: "Giữ vai trò lãnh đạo, thúc đẩy cách mạng tiến lên.", C: "Giữ vai trò chính trong việc lật đổ giai cấp tư sản.", D: "Giữ vai trò quyết định đến thành công của cách mạng." } },
-            { q: "Nội dung nào sau đây là một trong những biểu hiện của quan hệ sản xuất tư bản chủ nghĩa đã xâm nhập vào nông nghiệp ở nước Anh cuối thế kỉ XV đầu thế kỉ XVI?", a: "A", o: { A: "Hiện tượng “Cừu ăn thịt người”.", B: "Công trường thủ công ra đời.", C: "Ngành công nghiệp phát triển.", D: "Ngành dệt len dạ phát triển." } },
-            { q: "Đặc điểm nào sau đây phản ánh <strong>không</strong> đúng về tiền đề cách mạng tư sản ở nước Pháp thế kỉ XVIII?", a: "D", o: { A: "Kinh tế công thương nghiệp phát triển mạnh.", B: "Công cụ và phương thức canh tác thô sơ.", C: "Dân cư chủ yếu sống bằng nghề nông.", D: "Quý tộc mới có thế lực về kinh tế và chính trị." } },
-            { q: "Giai cấp tư sản Anh chú trọng xuất khẩu tư bản sang các nước thuộc địa hơn là đầu tư sản xuất trong nước vì", a: "A", o: { A: "nguồn nguyên liệu và nhân công giá rẻ.", B: "nhu cầu tiêu thụ trong nước không nhiều.", C: "không có tài nguyên để sản xuất công nghiệp.", D: "năng lực lao động của công nhân ở Anh thấp." } },
-            { q: "Điểm tương đồng trong đời sống kinh tế các nước Mỹ, Đức, Anh, Pháp ở nửa cuối thế kỉ XIX là gì?", a: "D", o: { A: "Kinh tế lâm vào khủng hoảng, suy thoái.", B: "Sản xuất công nghiệp trì trệ, sa sút.", C: "Sản xuất nông nghiệp chậm phát triển.", D: "Xuất hiện các tổ chức độc quyền." } },
-            { q: "Mục tiêu chung của tất cả các cuộc cách mạng tư sản là", a: "A", o: { A: "tạo điều kiện cho kinh tế tư bản chủ nghĩa phát triển.", B: "giải quyết mâu thuẫn giữa hai giai cấp nông dân và địa chủ.", C: "tạo điều kiện tiến hành cách mạng công nghiệp thành công.", D: "mở đường cho cách mạng khoa học kỹ thuật phát triển." } },
-            { q: "Vai trò của tư tưởng “Triết học Ánh sáng” đối với Cách mạng tư sản Pháp (1789) là", a: "C", o: { A: "đưa ra những lý thuyết về xây dựng nhà nước mới.", B: "phê phán giáo lý lạc hậu, những quan điểm lỗi thời.", C: "dọn đường cho các cuộc cách mạng xã hội bùng nổ.", D: "đề xuất tư tưởng mới tiến bộ, thúc đẩy xã hội tiến lên." } },
-            { q: "Hình thức tổ chức độc quyền phổ biến ở Đức thế kỉ XIX là", a: "A", o: { A: "Các-ten.", B: "Xanh-đi-ca.", C: "Tơ-rớt.", D: "Công-xoóc-xi-um." } },
-            { q: "Nước nào sau đây được mệnh danh là <em>“Đế quốc mà Mặt Trời không bao giờ lặn”</em>?", a: "A", o: { A: "Anh.", B: "Pháp.", C: "Mỹ.", D: "Đức." } },
-            { q: "Từ đầu thế kỉ XIX, để đáp ứng nhu cầu ngày càng cao về nguyên liệu và nhân công các nước tư bản phương Tây đã tăng cường", a: "C", o: { A: "hợp tác và mở rộng đầu tư.", B: "thu hút vốn đầu tư bên ngoài.", C: "xâm lược và mở rộng thuộc địa.", D: "đổi mới hình thức kinh doanh." } },
-            { q: "Chính sách xâm lược và mở rộng thuộc địa của các nước tư bản nhằm mục đích đáp ứng nhu cầu", a: "D", o: { A: "phát triển khoa học – kĩ thuật.", B: "giải quyết tình trạng thất nghiệp.", C: "thu hút nguồn vốn đầu tư bên ngoài.", D: "về nguyên liệu và nhân công." } },
-            { q: "Nội dung nào sau đây là một trong những thách thức mà chủ nghĩa tư bản hiện đại phải đối mặt?", a: "C", o: { A: "Nguồn nhân công ngày càng cạn kiệt.", B: "Giao lưu kinh tế quốc tế ngày càng tăng.", C: "Mâu thuẫn xã hội ngày càng gia tăng.", D: "Sự ra đời các tổ chức liên kết khu vực." } },
-            { q: "Nội dung nào sau đây <strong>không</strong> <strong>phải</strong> là thách thức mà chủ nghĩa tư bản hiện đại đang phải đối mặt?", a: "C", o: { A: "Khủng hoảng kinh tế, tài chính.", B: "Sự chênh lệch giàu nghèo.", C: "Tốc độ phát triển kinh tế toàn cầu.", D: "Tệ nạn xã hội, phân biệt chủng tộc." } },
-            { q: "Chủ nghĩa đế quốc ra đời từ cuối thế kỉ XIX đầu thế kỉ XX là hệ quả trực tiếp của quá trình", a: "A", o: { A: "xâm lược thuộc địa.", B: "giao lưu buôn bán.", C: "mở rộng thị trường.", D: "hợp tác kinh tế." } },
-            { q: "Sự kiện nào sau đây đánh dấu sự mở rộng của chủ nghĩa tư bản ở ngoài châu Âu?", a: "A", o: { A: "Chiến tranh giành độc lập của 13 thuộc địa Anh ở Bắc Mỹ.", B: "Phong trào đấu tranh giành độc lập ở khu vực Mỹ La-tinh.", C: "Cuộc vận động thống nhất nước Đức và I-ta-li-a.", D: "Cải cách nông nô ở Nga và cuộc nội chiến ở Mỹ." } },
-            { q: "Đến cuối thế kỉ XIX - đầu thế kỉ XX, Anh được mệnh danh là đế quốc “Mặt Trời không bao giờ lặn” do", a: "C", o: { A: "hệ thống thuộc địa của Anh bị thu hẹp về vùng xích đạo.", B: "phần lớn thuộc địa của Anh tập trung ở vùng xích đạo.", C: "hệ thống thuộc địa của Anh trải rộng ở khắp các châu lục.", D: "nhà nước Anh tập trung vào phát triển năng lượng Mặt Trời." } },
-            { q: "Lĩnh vực nào sau đây là một trong những tiềm năng phát triển của chủ nghĩa tư bản hiện đại?", a: "D", o: { A: "Quân sự, văn hóa.", B: "Văn hóa – giáo dục.", C: "Chính trị, ngoại giao.", D: "Khoa học – công nghệ." } },
-            { q: "Cuối thế kỉ XIX - đầu thế kỉ XX, ở nhiều nước tư bản, sự tập trung sản xuất và tập trung nguồn vốn lớn đã dẫn đến sự xuất hiện của các", a: "D", o: { A: "thương hội.", B: "phường hội.", C: "công trường thủ công.", D: "tổ chức độc quyền." } },
-            { q: "Cuối thế kỉ XIX - đầu thế kỉ XX, các nước tư bản chuyển sang giai đoạn", a: "B", o: { A: "tự do cạnh tranh.", B: "đế quốc chủ nghĩa.", C: "chủ nghĩa tư bản hiện đại.", D: "chủ nghĩa dân tộc cực đoan." } },
+            { q: "Sự phát triển của nền kinh tế đã làm biến đổi xã hội Tây Âu và Bắc Mỹ, xuất hiện các giai cấp, tầng lớp mới đại diện cho phương thức sản xuất", a: "A", o: { A: "tư bản chủ nghĩa.", B: "phong kiến.", C: "xã hội chủ nghĩa.", D: "chiếm hữu nô lệ." } },
+            { q: "Đến giữa thế kỉ XVIII, miền Bắc của 13 bang thuộc địa Anh ở Bắc Mĩ phổ biến phát triển", a: "B", o: { A: "kinh tế đồn điền.", B: "công trường thủ công.", C: "dệt và làm gốm.", D: "phường hội thủ công." } },
+            { q: "Lực lượng nào lãnh đạo của cuộc cách mạng tư sản thế kỉ XVI - XVIII?", a: "A", o: { A: "Giai cấp tư sản.", B: "Giai cấp công nhân.", C: "Giai cấp nông dân.", D: "Giai cấp địa chủ." } },
+            { q: "Các cuộc cách mạng tư sản thế kỉ XVI - XVIII có hai nhiệm vụ cơ bản là", a: "A", o: { A: "dân tộc và dân chủ.", B: "dân tộc và dân sinh.", C: "độc lập và tự do.", D: "dân chủ và dân quyền." } },
+            { q: "Đẳng cấp 3 trong xã hội Pháp trước cách mạng tư sản (thế kỉ XVIII) gồm những lực lượng nào?", a: "A", o: { A: "Tư sản, nông dân, bình dân thành thị.", B: "Quý tộc, nông dân, tăng lữ, thợ thủ công.", C: "Tăng lữ, quý tộc và tư sản, nông dân.", D: "Vua, quan lại, tăng lữ, bình dân thành thị." } },
+            { q: "Đặc điểm nổi bật của tình hình chính trị nước Anh và Pháp trước khi bùng nổ cách mạng tư sản là", a: "A", o: { A: "tồn tại chế độ quân chủ chuyên chế.", B: "là thuộc địa của chủ nghĩa thực dân.", C: "xuất hiện kinh tế tư bản chủ nghĩa.", D: "xuất hiện trào lưu triết học ánh sáng." } },
+            { q: "Các cuộc cách mạng tư sản thời cận đại có điểm gì chung?", a: "A", o: { A: "Mở đường cho chủ nghĩa tư bản phát triển.", B: "Tư sản và chủ nô lãnh đạo.", C: "Nhằm mục đích xóa bỏ chế độ nô lệ.", D: "Diễn ra dưới hình thức nội chiến." } },
+            { q: "Tính chất của Chiến tranh giành độc lập ở Bắc Mĩ cuối thế kỉ XVIII là cuộc", a: "C", o: { A: "nội chiến đẫm máu.", B: "cách mạng tư sản triệt để.", C: "cách mạng tư sản không triệt để.", D: "chiến tranh giải phóng vô sản." } },
+            { q: "Mục tiêu chung của cách cuộc cách mạng tư sản ở thế kỉ XVI- XVIII là gì?", a: "A", o: { A: "Lật đổ chế đổ phong kiến, thực dân cùng tàn tích của nó.", B: "Lật đổ xã hội nguyên thủy, cổ đại cùng tàn tích của nó.", C: "Tạo điều kiện cho sự phát triển của chế độ phong kiến.", D: "Mở đường cho sự phát triển của chủ nghĩa xã hội." } },
+            { q: "Mâu thuẫn nào sau đây là một trong những tiền đề của các cách mạng tư sản?", a: "C", o: { A: "Công nhân với địa chủ phong kiến.", B: "Tư sản với tầng lớp quý tộc mới.", C: "Tư sản, quý tộc mới với chế độ phong kiến.", D: "Bình dân thành thị với nhà nước phong kiến." } },
+            { q: "Hình bên mô tả biểu hiện nào sau đây khi quan hệ sản xuất tư bản chủ nghĩa đã xâm nhập vào nông nghiệp ở nước Anh cuối thế kỉ XV đầu thế kỉ XVI?", a: "A", o: { A: "Hiện tượng “Cừu ăn thịt người”.", B: "Ngành công nghiệp phát triển.", C: "Ngành dệt len dạ phát triển.", D: "Công trường thủ công ra đời." } },
+            { q: "Sự kiện nào ở hình bên đánh dấu Cách mạng tư sản Pháp bùng nổ (14/7/1789)?", a: "B", o: { A: "Quốc hội phế truất vua, thiết lập nền cộng hòa.", B: "Quần chúng nhân dân tấn công ngục Bastilles.", C: "Quân khởi nghĩa tấn công cung điện Versailles.", D: "Hội nghị ba đẳng cấp tại cung điện Versailles." } },
+            { q: "Đại hội Xô viết toàn Nga lần thứ hai, khai mạc đêm 25-10-1917 đã ra tuyên bố", a: "A", o: { A: "thành lập chính quyền Xô viết.", B: "thông qua sắc lệnh “Hòa bình”.", C: "thông qua sắc lệnh “Ruộng đất”.", D: "thông qua chính sách “Kinh tế mới”." } },
+            { q: "Bốn nước đầu tiên trong Liên bang cộng hòa xã hội chủ nghĩa Xô viết (1922) là", a: "A", o: { A: "Nga, U-crai-na, Bê-lô-rút-xi-a và Ngoại Cáp-ca-dơ.", B: "Nga, Bê-lô-rút-xi-a, Ca-dắc-xtan và Ngoại Cáp-ca-dơ.", C: "Nga, U-crai-na, E-xtô-ni-a và Lít-va.", D: "Nga, U-crai-na, Lít-va, Bê-la-rút-xi-a." } },
+            { q: "Sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết có ý nghĩa như thế nào đối với quốc tế?", a: "B", o: { A: "Làm thất bại ý đồ và hành động chia rẽ của các thế lực thù địch.", B: "Tạo tiền đề cho sự ra đời của hệ thống xã hội chủ nghĩa.", C: "Củng cố và tăng cường vị thế của Liên Xô trên trường quốc tế.", D: "Tạo điều kiện để các nước cộng hòa phát triển kinh tế - xã hội." } },
+            { q: "Nhằm thủ tiêu những tàn tích của chế độ phong kiến, đem lại các quyền tự do, dân chủ cho nhân dân, ngày 26/10/1917 (theo lịch Nga), Chính quyền Nga Xô viết đã", a: "C", o: { A: "thông qua Chính sách kinh tế mới do Lenin soạn thảo.", B: "phát động cuộc đấu tranh chống thù trong, giặc ngoài.", C: "ban hành Sắc lệnh Hòa bình và Sắc lệnh Ruộng đất.", D: "ban hành Chính sách Cộng sản thời chiến." } },
+            { q: "Nguyên nhân quyết định dẫn đến thắng lợi của các nước Cộng hòa xã hội chủ nghĩa trên đất nước Xô viết trong cuộc chiến chống thù trong, giặc ngoài là", a: "A", o: { A: "sự đoàn kết, giúp đỡ nhau.", B: "sự ủng hộ từ bên ngoài.", C: "có sức mạnh về ngoại giao.", D: "có sự ủng hộ của Mỹ." } },
+            { q: "Sau Cách mạng tháng Mười Nga (1917), nhiệm vụ hàng đầu của chính quyền Xô viết là", a: "A", o: { A: "đập tan bộ máy nhà nước cũ, xây dựng bộ máy nhà nước mới.", B: "hàn gắn vết thương chiến tranh, khôi phục và phát triển kinh tế.", C: "khôi phục và phát triển kinh tế, chống lại thù trong giặc ngoài.", D: "tiến hành công nghiệp hóa, hiện đại hóa tiến lên chủ nghĩa xã hội." } },
+            { q: "Đối với Liên Xô, sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết <strong>không</strong> có ý nghĩa nào sau đây?", a: "D", o: { A: "Thể hiện sức mạnh đoàn kết, giúp đỡ nhau giữa các dân tộc Xô viết.", B: "Phù hợp với lợi ích chung của các dân tộc trên đất nước Xô viết.", C: "Tăng cường vị thế của Nhà nước Liên Xô trên trường quốc tế.", D: "Tạo tiền đề cho sự ra đời của hệ thống xã hội chủ nghĩa trên thế giới." } },
+            { q: "Tháng 01/1924, bản Hiến pháp đầu tiên của Liên Xô được thông qua, hoàn thành quá trình thành lập", a: "D", o: { A: "nhà nước dân chủ tư sản kiểu mới đầu tiên trên thế giới.", B: "chính Đảng vô sản đầu tiên, đấu tranh cho quyền lợi của mọi giai cấp.", C: "nhà nước tư bản hiện đại đầu tiên trên thế giới.", D: "nhà nước Liên bang Cộng hoà xã hội chủ nghĩa đầu tiên trên thế giới." } },
+            { q: "Hiến pháp Liên Xô (1924) ghi nhận việc hợp tác giữa các nước Xô viết thành một nhà nước Liên bang dựa trên cơ sở", a: "C", o: { A: "đồng thuận về văn hóa.", B: "hợp nhất các lực lượng.", C: "tự nguyện của các quốc gia.", D: "tự nguyện có điều kiện." } },
+            { q: "Liên Xô được xem là chỗ dựa vững chắc của phong trào cách mạng và hòa bình thế giới vì", a: "A", o: { A: "chính phủ Liên Xô có nhiều chính sách đối ngoại hòa bình và tích cực ủng hộ phong trào giải phóng dân tộc trên thế giới.", B: "Liên Xô đạt được thế cân bằng chiến lược về sức mạnh quân sự nói chung và sức mạnh hạt nhân nói riêng so với Mĩ.", C: "Liên Xô là cường quốc công nghiệp đứng hàng thứ hai trên thế giới (chỉ sau Mĩ).", D: "Liên Xô là nước dẫn đầu thế giới về những chuyến bay dài ngày trong vũ trụ." } },
+            { q: "Một trong những nguyên nhân giúp nhiều nước Đông Âu đạt được nhiều thành tựu kinh tế - xã hội giai đoạn 1950 - 1970 là nhờ", a: "A", o: { A: "sự giúp đỡ của Liên Xô.", B: "diễn ra cuộc cách mạng tư sản.", C: "có trình độ khoa học - kĩ thuật đi đầu.", D: "đất nước hòa bình, không có sự chống phá." } },
+            { q: "Từ năm 1991, nước Cộng hòa Cu-ba đã phải đối mặt với nhiều khó khăn thách thức, đặc biệt là", a: "D", o: { A: "sự chống phá của các thế lực thù địch trong nước.", B: "chính quyền độc tài thân Mĩ chưa bị lật đổ.", C: "con đường xã hội chủ nghĩa chưa có tính ưu việt.", D: "lệnh cấm vận kéo dài của Mỹ và phương Tây." } },
+            { q: "Năm 2003, Trung Quốc đạt được thành tựu khoa học kỹ thuật nào sau đây?", a: "C", o: { A: "Phóng thành công vệ tinh nhân tạo.", B: "Thử thành công bom nguyên tử.", C: "Phóng tàu vũ trụ Thần Châu V.", D: "Phóng tàu thăm dò Mặt Trăng." } },
+            { q: "Một trong những đặc khu kinh tế đầu tiên của Trung Quốc được xây dựng trong thời kỳ cải cách mở cửa là", a: "D", o: { A: "Hàng Châu.", B: "Thành Đô.", C: "Quảng Châu.", D: "Thâm Quyến." } },
+            { q: "Từ cuối thế kỷ XX, vị thế của Trung Quốc không ngừng được nâng cao trên trường quốc tế là do", a: "A", o: { A: "sự điều chỉnh chính sách đối ngoại và bình thường hóa quan hệ với nhiều nước.", B: "sở hữu nhiều vũ khí hạt nhân và công nghệ quốc phòng nhiều nhất trên thế giới.", C: "ra sức thực hiện “giấc mơ Trung Hoa”, âm mưu làm bá chủ trên toàn thế giới.", D: "thường xuyên gây ra nhiều cuộc chiến tranh xâm và nô dịch các nước láng giềng." } },
+            { q: "Năm 2010, quốc gia nào sau đây có nền kinh tế đứng thứ hai thế giới?", a: "D", o: { A: "Liên Xô.", B: "Nhật Bản.", C: "Việt Nam.", D: "Trung Quốc." } },
+            { q: "Sau Chiến tranh thế giới thứ hai, chủ nghĩa xã hội từ phạm vi một nước đã", a: "B", o: { A: "trở thành siêu cường số một thế giới.", B: "trở thành một hệ thống trên thế giới.", C: "bị xoá bỏ hoàn toàn trên thế giới.", D: "lan rộng sang các nước ở Tây Âu." } },
+            { q: "Từ năm 1978 đến nay, nền kinh tế của Trung Quốc đã đạt được thành tựu nổi bật là", a: "A", o: { A: "tốc độ tăng trưởng trung bình hằng năm cao nhất thế giới.", B: "trở thành trung tâm kinh tế - tài chính của cả thế giới.", C: "vượt sự phát triển của Nhật Bản, luôn đứng đầu châu Á.", D: "trở thành quốc gia nắm giữ chuỗi cung ứng toàn cầu." } },
+            { q: "Sự kiện nào đánh dấu chủ nghĩa xã hội đã vượt ra khỏi phạm vi một nước (Liên Xô) và bước đầu trở thành hệ thống thế giới?", a: "A", o: { A: "Sự ra đời các nước dân chủ nhân dân Đông Âu.", B: "Sự ra đời nước Cộng hòa Nhân dân Trung Hoa.", C: "Sự ra đời của nước Cộng hòa Ấn Độ.", D: "Sự ra đời nước Cộng hòa Cuba." } },
+            { q: "Năm 1991, sự kiện nào dưới đây có tác động lớn tới hệ thống XHCN?", a: "A", o: { A: "CNXH sụp đổ ở Liên Xô.", B: "CNXH bắt đầu lâm vào khủng hoảng.", C: "Việt Nam tiến hành đường lối đổi mới", D: "Trung Quốc tiến hành cải cách." } }
         ],
-        tf: [
-            {
-                q: "Đọc đoạn tư liệu về Tuyên ngôn Mỹ (1776) và Pháp (1791)",
-                s: [
-                    { t: "Bản Tuyên ngôn Nhân quyền và Dân quyền (1791) ở nước Pháp đã khẳng định các quyền cơ bản của công dân.", a: "Đúng" },
-                    { t: "Cách mạng tư sản Pháp cuối thế kỷ XVIII đã thực hiện đầy đủ các nhiệm vụ dân tộc và dân chủ của cách mạng tư sản.", a: "Đúng" },
-                    { t: "Bản Tuyên ngôn... của nước Pháp (1791) không đề cập đến quyền tư hữu cá nhân...", a: "Sai" },
-                    { t: "Các quyền dân tộc cơ bản trong Tuyên ngôn... đã được phát triển... trong Tuyên ngôn độc lập của Việt Nam (1945).", a: "Đúng" }
-                ]
-            },
-            {
-                q: "Đọc đoạn tư liệu về \"rào đất cướp ruộng\" ở Anh",
-                s: [
-                    { t: "Cuối thế kỉ XV – đầu thế kỉ XVI, phương thức sản xuất tư bản chủ nghĩa đã thâm nhập mạnh vào nông nghiệp Anh.", a: "Đúng" },
-                    { t: "Nguyên nhân chủ yếu dẫn đến phong trào <em>“rào đất cướp ruộng”</em>... là do sự phát triển... của ngành công nghiệp len dạ.", a: "Đúng" },
-                    { t: "Sự phát triển của kinh tế tư bản chủ nghĩa... làm xuất hiện tầng lớp quý tộc mới.", a: "Đúng" },
-                    { t: "Phong trào <em>“rào đất cướp ruộng”</em> đã góp phần cải thiện đời sống của nông dân Anh...", a: "Sai" }
-                ]
-            },
-            {
-                q: "Đọc đoạn tư liệu của Lênin về chủ nghĩa tư bản",
-                s: [
-                    { t: "Một trong những đặc điểm của chủ nghĩa tư bản độc quyền là xuất hiện các tổ chức như: cartel, syndicate, trust,…", a: "Đúng" },
-                    { t: "Tổ chức độc quyền là sự liên minh kinh tế giữa giai cấp tư sản và chủ nô để thu lợi nhuận cao.", a: "Sai" },
-                    { t: "Đoạn tư liệu cho thấy sự hợp nhất tư bản ngân hàng với tư bản tài chính tạo nên <em>“tư bản công nghiệp”.</em>", a: "Sai" },
-                    { t: "Chủ nghĩa tư bản độc quyền là giai đoạn các cường quốc tư bản chủ nghĩa bắt đầu xâm lược...", a: "Sai" }
-                ]
-            },
-            {
-                q: "Đọc đoạn tư liệu về phong trào \"99 chống lại 1\"",
-                s: [
-                    { t: "Sự phân hóa giàu nghèo sâu sắc là một trong những thách thức mà nước Mỹ hiện nay phải đối mặt.", a: "Đúng" },
-                    { t: "Nguyên nhân sâu xa dẫn đến phong trào <em>“99 chống lại 1”</em> ở nước Mỹ là hệ quả của quá trình phân biệt chủng tộc ở Mỹ.", a: "Sai" },
-                    { t: "Đoạn trích phản ánh các mặt tích cực và hạn chế của nước Mỹ...", a: "Sai" },
-                    { t: "Phong trào<em> “99 chống lại 1”</em> cho thấy chủ nghĩa tư bản không ngừng tự điều chỉnh để thích nghi.", a: "Sai" }
-                ]
-            }
-        ]
+        tf: [] // Không có dữ liệu Đúng/Sai trong đề mới
     };
-
 
     document.addEventListener('DOMContentLoaded', function() {
         const quizForm = document.getElementById('quizForm');
         const mcContainer = document.getElementById('mc-questions-container');
         const tfContainer = document.getElementById('tf-questions-container');
+        const part2Container = document.getElementById('part2-container');
         const submitBtn = document.querySelector('.submit-btn');
         const resultsDiv = document.getElementById('results');
         const modeRadios = document.querySelectorAll('input[name="mode"]');
         const resetBtn = document.querySelector('.reset-btn');
 
         let currentMode = 'practice';
-        let questionCounter = 1;
+
+        // Ẩn phần 2 nếu không có dữ liệu
+        if (quizData.tf.length === 0) {
+            part2Container.style.display = 'none';
+        }
 
         // Fisher-Yates shuffle algorithm
         function shuffle(array) {
@@ -166,7 +139,6 @@
         function createQuiz() {
             mcContainer.innerHTML = '';
             tfContainer.innerHTML = '';
-            questionCounter = 1;
 
             // Shuffle and create MC questions
             const shuffledMC = shuffle([...quizData.mc]);
@@ -195,30 +167,32 @@
                 mcContainer.appendChild(questionDiv);
             });
 
-            // Shuffle and create TF questions
-            const shuffledTF = shuffle([...quizData.tf]);
-            shuffledTF.forEach((qData, qIndex) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question-block tf-options';
-                const questionText = document.createElement('p');
-                questionText.innerHTML = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
-                questionDiv.appendChild(questionText);
-                
-                qData.s.forEach((statement, sIndex) => {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'options-wrapper';
-                    const name = `q${shuffledMC.length + qIndex}_${sIndex}`;
-                    wrapper.dataset.name = name;
-                    wrapper.dataset.answer = statement.a;
+            // Shuffle and create TF questions (Nếu có)
+            if (quizData.tf.length > 0) {
+                const shuffledTF = shuffle([...quizData.tf]);
+                shuffledTF.forEach((qData, qIndex) => {
+                    const questionDiv = document.createElement('div');
+                    questionDiv.className = 'question-block tf-options';
+                    const questionText = document.createElement('p');
+                    questionText.innerHTML = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
+                    questionDiv.appendChild(questionText);
                     
-                    const statementText = `<span>${String.fromCharCode(97 + sIndex)}) ${statement.t}</span>`;
-                    wrapper.innerHTML = `${statementText}
-                        <label><input type="radio" name="${name}" value="Đúng"> Đúng</label>
-                        <label><input type="radio" name="${name}" value="Sai"> Sai</label>`;
-                    questionDiv.appendChild(wrapper);
+                    qData.s.forEach((statement, sIndex) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'options-wrapper';
+                        const name = `q${shuffledMC.length + qIndex}_${sIndex}`;
+                        wrapper.dataset.name = name;
+                        wrapper.dataset.answer = statement.a;
+                        
+                        const statementText = `<span>${String.fromCharCode(97 + sIndex)}) ${statement.t}</span>`;
+                        wrapper.innerHTML = `${statementText}
+                            <label><input type="radio" name="${name}" value="Đúng"> Đúng</label>
+                            <label><input type="radio" name="${name}" value="Sai"> Sai</label>`;
+                        questionDiv.appendChild(wrapper);
+                    });
+                    tfContainer.appendChild(questionDiv);
                 });
-                tfContainer.appendChild(questionDiv);
-            });
+            }
 
             updateNumbersAndLabels();
         }
@@ -272,7 +246,7 @@
                 });
             } else { // Test mode
                 submitBtn.classList.remove('hidden');
-                // Remove immediate listeners if they exist
+                // Remove immediate listeners
                  document.querySelectorAll('input[type="radio"]:not([name="mode"])').forEach(input => {
                     input.removeEventListener('change', checkAnswerImmediately);
                 });
@@ -304,6 +278,7 @@
             let scoreTF = 0;
             let totalTF = quizData.tf.reduce((acc, curr) => acc + curr.s.length, 0);
 
+            // Check MC
             document.querySelectorAll('#mc-questions-container .question-block').forEach(q => {
                 const correctAnswer = q.dataset.answer;
                 const userInput = q.querySelector('input:checked');
@@ -319,6 +294,7 @@
                 }
             });
 
+            // Check TF
             document.querySelectorAll('#tf-questions-container .options-wrapper').forEach(item => {
                 const correctAnswer = item.dataset.answer;
                 const userInput = item.querySelector('input:checked');
@@ -333,8 +309,16 @@
             });
 
             document.getElementById('score-mc').textContent = `Phần I (Nhiều lựa chọn): Đúng ${scoreMC} / ${totalMC} câu.`;
-            document.getElementById('score-tf').textContent = `Phần II (Đúng - Sai): Đúng ${scoreTF} / ${totalTF} ý.`;
-            document.getElementById('total-score').textContent = `Tổng điểm: ${scoreMC + scoreTF} / ${totalMC + totalTF}`;
+            
+            const tfResult = document.getElementById('score-tf');
+            if(totalTF > 0) {
+                tfResult.textContent = `Phần II (Đúng - Sai): Đúng ${scoreTF} / ${totalTF} ý.`;
+                tfResult.classList.remove('hidden');
+                document.getElementById('total-score').textContent = `Tổng điểm: ${scoreMC + scoreTF} / ${totalMC + totalTF}`;
+            } else {
+                 tfResult.classList.add('hidden');
+                 document.getElementById('total-score').textContent = `Tổng điểm: ${scoreMC} / ${totalMC}`;
+            }
 
             resultsDiv.classList.remove('hidden');
             resultsDiv.scrollIntoView({ behavior: 'smooth' });
