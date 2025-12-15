@@ -153,13 +153,7 @@
             transition: transform 0.2s ease;
         }
         
-        /* .question-block:hover {
-            transform: translateY(-3px);
-        } */
-
         .question-header {
-            display: flex;
-            gap: 12px;
             margin-bottom: 20px;
             font-size: 1.1rem;
             font-weight: 600;
@@ -169,7 +163,19 @@
         .q-number {
             color: var(--primary-color);
             font-weight: 800;
-            white-space: nowrap;
+            margin-right: 8px;
+        }
+
+        /* Image Styling */
+        .question-image {
+            display: block;
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
+            margin: 15px auto 25px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
         }
 
         /* Options Grid */
@@ -262,15 +268,7 @@
             border-color: var(--primary-color);
         }
 
-        /* Feedback Styles - The Important Part */
-        /* Correct */
-        .options label.immediate-correct,
-        .options label.final-correct,
-        .tf-choices label.final-correct,
-        .options input[type="radio"]:checked + .option-prefix + span + .immediate-correct { 
-            /* Note: Selector complexity handled via JS adding classes to parent label usually */
-        }
-        
+        /* Feedback Styles */
         .options label.immediate-correct,
         .options label.final-correct,
         .show-correct-answer {
@@ -279,7 +277,6 @@
             color: #065f46;
         }
 
-        /* Incorrect */
         .options label.immediate-incorrect,
         .options label.final-incorrect,
         .tf-choices label.final-incorrect {
@@ -288,7 +285,6 @@
             color: #991b1b;
         }
         
-        /* Shake Animation for wrong answers */
         @keyframes shake {
             0% { transform: translateX(0); }
             25% { transform: translateX(-5px); }
@@ -447,7 +443,10 @@
             { q: "Mục tiêu chung của cách cuộc cách mạng tư sản ở thế kỉ XVI- XVIII là gì?", a: "A", o: { A: "Lật đổ chế đổ phong kiến, thực dân cùng tàn tích của nó.", B: "Lật đổ xã hội nguyên thủy, cổ đại cùng tàn tích của nó.", C: "Tạo điều kiện cho sự phát triển của chế độ phong kiến.", D: "Mở đường cho sự phát triển của chủ nghĩa xã hội." } },
             { q: "Mâu thuẫn nào sau đây là một trong những tiền đề của các cách mạng tư sản?", a: "C", o: { A: "Công nhân với địa chủ phong kiến.", B: "Tư sản với tầng lớp quý tộc mới.", C: "Tư sản, quý tộc mới với chế độ phong kiến.", D: "Bình dân thành thị với nhà nước phong kiến." } },
             { q: "Hình bên mô tả biểu hiện nào sau đây khi quan hệ sản xuất tư bản chủ nghĩa đã xâm nhập vào nông nghiệp ở nước Anh cuối thế kỉ XV đầu thế kỉ XVI?", a: "A", o: { A: "Hiện tượng “Cừu ăn thịt người”.", B: "Ngành công nghiệp phát triển.", C: "Ngành dệt len dạ phát triển.", D: "Công trường thủ công ra đời." } },
-            { q: "Sự kiện nào ở hình bên đánh dấu Cách mạng tư sản Pháp bùng nổ (14/7/1789)?", a: "B", o: { A: "Quốc hội phế truất vua, thiết lập nền cộng hòa.", B: "Quần chúng nhân dân tấn công ngục Bastilles.", C: "Quân khởi nghĩa tấn công cung điện Versailles.", D: "Hội nghị ba đẳng cấp tại cung điện Versailles." } },
+            
+            // Câu 12 có hình ảnh
+            { q: "Sự kiện nào ở hình bên đánh dấu Cách mạng tư sản Pháp bùng nổ (14/7/1789)?", a: "B", img: "https://vantanminh.github.io/lichsu-ghk1-25-26/data/1.png", o: { A: "Quốc hội phế truất vua, thiết lập nền cộng hòa.", B: "Quần chúng nhân dân tấn công ngục Bastilles.", C: "Quân khởi nghĩa tấn công cung điện Versailles.", D: "Hội nghị ba đẳng cấp tại cung điện Versailles." } },
+            
             { q: "Đại hội Xô viết toàn Nga lần thứ hai, khai mạc đêm 25-10-1917 đã ra tuyên bố", a: "A", o: { A: "thành lập chính quyền Xô viết.", B: "thông qua sắc lệnh “Hòa bình”.", C: "thông qua sắc lệnh “Ruộng đất”.", D: "thông qua chính sách “Kinh tế mới”." } },
             { q: "Bốn nước đầu tiên trong Liên bang cộng hòa xã hội chủ nghĩa Xô viết (1922) là", a: "A", o: { A: "Nga, U-crai-na, Bê-lô-rút-xi-a và Ngoại Cáp-ca-dơ.", B: "Nga, Bê-lô-rút-xi-a, Ca-dắc-xtan và Ngoại Cáp-ca-dơ.", C: "Nga, U-crai-na, E-xtô-ni-a và Lít-va.", D: "Nga, U-crai-na, Lít-va, Bê-la-rút-xi-a." } },
             { q: "Sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết có ý nghĩa như thế nào đối với quốc tế?", a: "B", o: { A: "Làm thất bại ý đồ và hành động chia rẽ của các thế lực thù địch.", B: "Tạo tiền đề cho sự ra đời của hệ thống xã hội chủ nghĩa.", C: "Củng cố và tăng cường vị thế của Liên Xô trên trường quốc tế.", D: "Tạo điều kiện để các nước cộng hòa phát triển kinh tế - xã hội." } },
@@ -460,8 +459,13 @@
             { q: "Liên Xô được xem là chỗ dựa vững chắc của phong trào cách mạng và hòa bình thế giới vì", a: "A", o: { A: "chính phủ Liên Xô có nhiều chính sách đối ngoại hòa bình và tích cực ủng hộ phong trào giải phóng dân tộc trên thế giới.", B: "Liên Xô đạt được thế cân bằng chiến lược về sức mạnh quân sự nói chung và sức mạnh hạt nhân nói riêng so với Mĩ.", C: "Liên Xô là cường quốc công nghiệp đứng hàng thứ hai trên thế giới (chỉ sau Mĩ).", D: "Liên Xô là nước dẫn đầu thế giới về những chuyến bay dài ngày trong vũ trụ." } },
             { q: "Một trong những nguyên nhân giúp nhiều nước Đông Âu đạt được nhiều thành tựu kinh tế - xã hội giai đoạn 1950 - 1970 là nhờ", a: "A", o: { A: "sự giúp đỡ của Liên Xô.", B: "diễn ra cuộc cách mạng tư sản.", C: "có trình độ khoa học - kĩ thuật đi đầu.", D: "đất nước hòa bình, không có sự chống phá." } },
             { q: "Từ năm 1991, nước Cộng hòa Cu-ba đã phải đối mặt với nhiều khó khăn thách thức, đặc biệt là", a: "D", o: { A: "sự chống phá của các thế lực thù địch trong nước.", B: "chính quyền độc tài thân Mĩ chưa bị lật đổ.", C: "con đường xã hội chủ nghĩa chưa có tính ưu việt.", D: "lệnh cấm vận kéo dài của Mỹ và phương Tây." } },
-            { q: "Năm 2003, Trung Quốc đạt được thành tựu khoa học kỹ thuật nào sau đây?", a: "C", o: { A: "Phóng thành công vệ tinh nhân tạo.", B: "Thử thành công bom nguyên tử.", C: "Phóng tàu vũ trụ Thần Châu V.", D: "Phóng tàu thăm dò Mặt Trăng." } },
-            { q: "Một trong những đặc khu kinh tế đầu tiên của Trung Quốc được xây dựng trong thời kỳ cải cách mở cửa là", a: "D", o: { A: "Hàng Châu.", B: "Thành Đô.", C: "Quảng Châu.", D: "Thâm Quyến." } },
+            
+            // Câu 25 có hình ảnh
+            { q: "Năm 2003, Trung Quốc đạt được thành tựu khoa học kỹ thuật nào sau đây?", a: "C", img: "https://vantanminh.github.io/lichsu-ghk1-25-26/data/2.png", o: { A: "Phóng thành công vệ tinh nhân tạo.", B: "Thử thành công bom nguyên tử.", C: "Phóng tàu vũ trụ Thần Châu V.", D: "Phóng tàu thăm dò Mặt Trăng." } },
+            
+            // Câu 26 có hình ảnh
+            { q: "Một trong những đặc khu kinh tế đầu tiên của Trung Quốc được xây dựng trong thời kỳ cải cách mở cửa là", a: "D", img: "https://vantanminh.github.io/lichsu-ghk1-25-26/data/3.png", o: { A: "Hàng Châu.", B: "Thành Đô.", C: "Quảng Châu.", D: "Thâm Quyến." } },
+            
             { q: "Từ cuối thế kỷ XX, vị thế của Trung Quốc không ngừng được nâng cao trên trường quốc tế là do", a: "A", o: { A: "sự điều chỉnh chính sách đối ngoại và bình thường hóa quan hệ với nhiều nước.", B: "sở hữu nhiều vũ khí hạt nhân và công nghệ quốc phòng nhiều nhất trên thế giới.", C: "ra sức thực hiện “giấc mơ Trung Hoa”, âm mưu làm bá chủ trên toàn thế giới.", D: "thường xuyên gây ra nhiều cuộc chiến tranh xâm và nô dịch các nước láng giềng." } },
             { q: "Năm 2010, quốc gia nào sau đây có nền kinh tế đứng thứ hai thế giới?", a: "D", o: { A: "Liên Xô.", B: "Nhật Bản.", C: "Việt Nam.", D: "Trung Quốc." } },
             { q: "Sau Chiến tranh thế giới thứ hai, chủ nghĩa xã hội từ phạm vi một nước đã", a: "B", o: { A: "trở thành siêu cường số một thế giới.", B: "trở thành một hệ thống trên thế giới.", C: "bị xoá bỏ hoàn toàn trên thế giới.", D: "lan rộng sang các nước ở Tây Âu." } },
@@ -512,8 +516,20 @@
 
                 const questionHeader = document.createElement('div');
                 questionHeader.className = 'question-header';
-                questionHeader.innerHTML = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
+                
+                // Add Question Text
+                let innerContent = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
+                questionHeader.innerHTML = innerContent;
                 questionDiv.appendChild(questionHeader);
+
+                // Add Image if exists
+                if(qData.img) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = qData.img;
+                    imgElement.className = 'question-image';
+                    imgElement.alt = "Hình minh họa câu hỏi";
+                    questionDiv.appendChild(imgElement);
+                }
 
                 const optionsDiv = document.createElement('div');
                 optionsDiv.className = 'options';
@@ -521,8 +537,6 @@
                 const optionKeys = shuffle(Object.keys(qData.o));
                 optionKeys.forEach(key => {
                     const label = document.createElement('label');
-                    // Removed span option-prefix from innerHTML to add via CSS/JS logic if needed, 
-                    // but here we keep structure for styling
                     label.innerHTML = `
                         <input type="radio" name="${questionName}" value="${key}"> 
                         <span class="option-prefix"></span> 
@@ -547,6 +561,14 @@
                     questionHeader.innerHTML = `<span class="q-number"></span> <span class="q-text">${qData.q}</span>`;
                     questionDiv.appendChild(questionHeader);
                     
+                    if(qData.img) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = qData.img;
+                        imgElement.className = 'question-image';
+                        imgElement.alt = "Hình minh họa câu hỏi";
+                        questionDiv.appendChild(imgElement);
+                    }
+
                     qData.s.forEach((statement, sIndex) => {
                         const wrapper = document.createElement('div');
                         wrapper.className = 'options-wrapper';
@@ -577,7 +599,7 @@
             
             document.querySelectorAll('#mc-questions-container .options').forEach(optionsDiv => {
                 optionsDiv.querySelectorAll('label').forEach((label, index) => {
-                    label.querySelector('.option-prefix').textContent = `${String.fromCharCode(65 + index)}`;
+                    label.querySelector('.option-prefix').textContent = `${String.fromCharCode(65 + index)}.`;
                 });
             });
         }
@@ -586,7 +608,6 @@
             if (currentMode !== 'practice') return;
             const selectedInput = event.target;
             
-            // Determine if it's MC or TF
             const isTF = selectedInput.closest('.tf-choices') !== null;
             
             let parentWrapper, correctAnswer, selectedLabel;
@@ -604,15 +625,12 @@
             const name = parentWrapper.dataset.name;
             const questionInputs = parentWrapper.querySelectorAll(`input[name="${name}"]`);
             
-            // Reset classes first if needed (though inputs are disabled after one click)
-            
             if (userAnswer === correctAnswer) {
                 selectedLabel.classList.add('immediate-correct');
             } else {
                 selectedLabel.classList.add('immediate-incorrect');
             }
             
-            // Show correct answer
             if (isTF) {
                  parentWrapper.querySelectorAll('input').forEach(input => {
                     if(input.value === correctAnswer) {
@@ -640,7 +658,7 @@
                 submitBtn.classList.remove('hidden');
                 document.querySelectorAll('input[type="radio"]:not([name="mode"])').forEach(input => {
                     input.removeEventListener('change', checkAnswerImmediately);
-                    input.disabled = false; // Ensure enabled
+                    input.disabled = false;
                 });
             }
         }
@@ -671,12 +689,10 @@
             let scoreTF = 0;
             let totalTF = quizData.tf.reduce((acc, curr) => acc + curr.s.length, 0);
 
-            // Check MC
             document.querySelectorAll('#mc-questions-container .question-block').forEach(q => {
                 const correctAnswer = q.dataset.answer;
                 const userInput = q.querySelector('input:checked');
                 
-                // Disable all inputs
                 q.querySelectorAll('input').forEach(i => i.disabled = true);
 
                 if (userInput) {
@@ -686,17 +702,14 @@
                         userLabel.classList.add('final-correct');
                     } else {
                         userLabel.classList.add('final-incorrect');
-                        // Show correct
                          q.querySelector(`input[value="${correctAnswer}"]`).parentElement.classList.add('final-correct');
                     }
                 } else {
-                    // Show correct answer even if not selected
                      const correctInput = q.querySelector(`input[value="${correctAnswer}"]`);
                      if(correctInput) correctInput.parentElement.classList.add('show-correct-answer');
                 }
             });
 
-            // Check TF
             document.querySelectorAll('#tf-questions-container .options-wrapper').forEach(item => {
                 const correctAnswer = item.dataset.answer;
                 const userInput = item.querySelector('input:checked');
@@ -709,7 +722,6 @@
                         userInput.parentElement.classList.add('final-correct');
                     } else {
                         userInput.parentElement.classList.add('final-incorrect');
-                        // Highlight correct
                         item.querySelector(`input[value="${correctAnswer}"]`).parentElement.classList.add('final-correct');
                     }
                 }
@@ -733,7 +745,6 @@
             }, 100);
         });
 
-        // Initial setup
         initializeQuiz();
     });
     </script>
