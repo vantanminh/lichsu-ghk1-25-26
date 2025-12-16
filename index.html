@@ -297,6 +297,28 @@
             animation: shake 0.4s ease-in-out;
         }
 
+        /* Explanation Box */
+        .explanation-box {
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: #334155;
+            display: none; /* Hidden by default */
+            animation: slideUp 0.3s ease-out;
+        }
+        .explanation-box.show {
+            display: block;
+        }
+        .explanation-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            display: block;
+        }
+
         /* Submit Button */
         .submit-btn {
             display: block;
@@ -456,7 +478,7 @@
             { q: "Đối với Liên Xô, sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết <strong>không</strong> có ý nghĩa nào sau đây?", a: "D", o: { A: "Thể hiện sức mạnh đoàn kết, giúp đỡ nhau giữa các dân tộc Xô viết.", B: "Phù hợp với lợi ích chung của các dân tộc trên đất nước Xô viết.", C: "Tăng cường vị thế của Nhà nước Liên Xô trên trường quốc tế.", D: "Tạo tiền đề cho sự ra đời của hệ thống xã hội chủ nghĩa trên thế giới." } },
             { q: "Tháng 01/1924, bản Hiến pháp đầu tiên của Liên Xô được thông qua, hoàn thành quá trình thành lập", a: "D", o: { A: "nhà nước dân chủ tư sản kiểu mới đầu tiên trên thế giới.", B: "chính Đảng vô sản đầu tiên, đấu tranh cho quyền lợi của mọi giai cấp.", C: "nhà nước tư bản hiện đại đầu tiên trên thế giới.", D: "nhà nước Liên bang Cộng hoà xã hội chủ nghĩa đầu tiên trên thế giới." } },
             { q: "Hiến pháp Liên Xô (1924) ghi nhận việc hợp tác giữa các nước Xô viết thành một nhà nước Liên bang dựa trên cơ sở", a: "C", o: { A: "đồng thuận về văn hóa.", B: "hợp nhất các lực lượng.", C: "tự nguyện của các quốc gia.", D: "tự nguyện có điều kiện." } },
-            { q: "Liên Xô được xem là chỗ dựa vững chắc của phong trào cách mạng và hòa bình thế giới vì", a: "A", o: { A: "chính phủ Liên Xô có nhiều chính sách đối ngoại hòa bình và tích cực ủng hộ phong trào giải phóng dân tộc trên thế giới.", B: "Liên Xô đạt được thế cân bằng chiến lược về sức mạnh quân sự nói chung và sức mạnh hạt nhân nói riêng so với Mĩ.", C: "Liên Xô là cường quốc công nghiệp đứng hàng thứ hai trên thế giới (chỉ sau Mĩ).", D: "Liên Xô là nước dẫn đầu thế giới về những chuyến bay dài ngày trong vũ trụ." } },
+            { q: "Liên Xô được xem là chỗ dựa vững chắc của phong trào cách mạng và hòa bình thế giới vì", a: "A,B", explanation: "Khuyến khích đáp án <strong>A</strong>. <br>Lập luận cốt lõi: Liên Xô chủ trương bảo vệ hòa bình thế giới, thiết lập quan hệ hữu nghị và ủng hộ phong trào giải phóng dân tộc, qua đó trở thành điểm tựa cho hòa bình và cách mạng thế giới.<br>Các đáp án khác (quân sự, công nghiệp, vũ trụ) là cơ sở làm tăng vị thế, nhưng không phải lý do trực tiếp giải thích vai trò 'chỗ dựa vững chắc'.", o: { A: "chính phủ Liên Xô có nhiều chính sách đối ngoại hòa bình và tích cực ủng hộ phong trào giải phóng dân tộc trên thế giới.", B: "Liên Xô đạt được thế cân bằng chiến lược về sức mạnh quân sự nói chung và sức mạnh hạt nhân nói riêng so với Mĩ.", C: "Liên Xô là cường quốc công nghiệp đứng hàng thứ hai trên thế giới (chỉ sau Mĩ).", D: "Liên Xô là nước dẫn đầu thế giới về những chuyến bay dài ngày trong vũ trụ." } },
             { q: "Một trong những nguyên nhân giúp nhiều nước Đông Âu đạt được nhiều thành tựu kinh tế - xã hội giai đoạn 1950 - 1970 là nhờ", a: "A", o: { A: "sự giúp đỡ của Liên Xô.", B: "diễn ra cuộc cách mạng tư sản.", C: "có trình độ khoa học - kĩ thuật đi đầu.", D: "đất nước hòa bình, không có sự chống phá." } },
             { q: "Từ năm 1991, nước Cộng hòa Cu-ba đã phải đối mặt với nhiều khó khăn thách thức, đặc biệt là", a: "D", o: { A: "sự chống phá của các thế lực thù địch trong nước.", B: "chính quyền độc tài thân Mĩ chưa bị lật đổ.", C: "con đường xã hội chủ nghĩa chưa có tính ưu việt.", D: "lệnh cấm vận kéo dài của Mỹ và phương Tây." } },
             
@@ -546,6 +568,15 @@
                 });
 
                 questionDiv.appendChild(optionsDiv);
+
+                // Add Explanation Box
+                if (qData.explanation) {
+                    const explainDiv = document.createElement('div');
+                    explainDiv.className = 'explanation-box';
+                    explainDiv.innerHTML = `<span class="explanation-title">💡 Giải thích:</span> ${qData.explanation}`;
+                    questionDiv.appendChild(explainDiv);
+                }
+
                 mcContainer.appendChild(questionDiv);
             });
 
@@ -625,22 +656,29 @@
             const name = parentWrapper.dataset.name;
             const questionInputs = parentWrapper.querySelectorAll(`input[name="${name}"]`);
             
-            if (userAnswer === correctAnswer) {
+            // Handle multiple correct answers (e.g. "A,B")
+            const correctAnswersList = correctAnswer.split(',');
+
+            if (correctAnswersList.includes(userAnswer)) {
                 selectedLabel.classList.add('immediate-correct');
             } else {
                 selectedLabel.classList.add('immediate-incorrect');
             }
             
+            // Show explanation if exists
+            const explanation = parentWrapper.querySelector('.explanation-box');
+            if (explanation) explanation.classList.add('show');
+            
             if (isTF) {
                  parentWrapper.querySelectorAll('input').forEach(input => {
-                    if(input.value === correctAnswer) {
+                    if(correctAnswersList.includes(input.value)) {
                         input.parentElement.classList.add('show-correct-answer');
                     }
                     input.disabled = true;
                 });
             } else {
                 parentWrapper.querySelectorAll('.options input').forEach(input => {
-                    if(input.value === correctAnswer) {
+                    if(correctAnswersList.includes(input.value)) {
                         input.parentElement.classList.add('show-correct-answer');
                     }
                     input.disabled = true;
@@ -695,18 +733,29 @@
                 
                 q.querySelectorAll('input').forEach(i => i.disabled = true);
 
+                const correctAnswersList = correctAnswer.split(',');
+                
+                // Show explanation
+                const explanation = q.querySelector('.explanation-box');
+                if (explanation) explanation.classList.add('show');
+
                 if (userInput) {
                     const userLabel = userInput.parentElement;
-                    if (userInput.value === correctAnswer) {
+                    if (correctAnswersList.includes(userInput.value)) {
                         scoreMC++;
                         userLabel.classList.add('final-correct');
                     } else {
                         userLabel.classList.add('final-incorrect');
-                         q.querySelector(`input[value="${correctAnswer}"]`).parentElement.classList.add('final-correct');
+                         correctAnswersList.forEach(val => {
+                            const correctInput = q.querySelector(`input[value="${val}"]`);
+                            if(correctInput) correctInput.parentElement.classList.add('final-correct');
+                         });
                     }
                 } else {
-                     const correctInput = q.querySelector(`input[value="${correctAnswer}"]`);
-                     if(correctInput) correctInput.parentElement.classList.add('show-correct-answer');
+                     correctAnswersList.forEach(val => {
+                        const correctInput = q.querySelector(`input[value="${val}"]`);
+                        if(correctInput) correctInput.parentElement.classList.add('show-correct-answer');
+                     });
                 }
             });
 
