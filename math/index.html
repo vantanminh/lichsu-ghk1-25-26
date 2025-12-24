@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài Liệu Ôn Tập Toán - THPT</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .no-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .print-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+
+        .print-btn:hover {
+            background: #45a049;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            padding: 20mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 24pt;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 18pt;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 14pt;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 12pt;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        p {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .formula {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 3px;
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+            border-radius: 3px;
+            font-style: italic;
+        }
+
+        .advice {
+            background: #d4edda;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #28a745;
+            border-radius: 3px;
+        }
+
+        .advice h3 {
+            color: #155724;
+            margin-top: 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #ddd;
+            margin: 30px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            .container {
+                max-width: 100%;
+                box-shadow: none;
+                padding: 15mm;
+            }
+
+            h1 {
+                font-size: 20pt;
+            }
+
+            h2 {
+                font-size: 16pt;
+                page-break-after: avoid;
+            }
+
+            h3 {
+                font-size: 13pt;
+                page-break-after: avoid;
+            }
+
+            h4 {
+                font-size: 11pt;
+            }
+
+            .formula, .note, .advice {
+                page-break-inside: avoid;
+            }
+
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print">
+        <button class="print-btn" onclick="window.print()">🖨️ In / Xuất PDF</button>
+    </div>
+
+    <div class="container">
+        <h1>Tài Liệu Ôn Tập Toán: Đại Số & Hình Học</h1>
+
+        <h2>PHẦN I: ĐẠI SỐ & GIẢI TÍCH</h2>
+
+        <h3>1. Công Thức Lượng Giác</h3>
+        
+        <h4>a. Hệ thức cơ bản:</h4>
+        <div class="formula">
+            <ul>
+                <li>\(\sin^2 x + \cos^2 x = 1\)</li>
+                <li>\(\tan x = \frac{\sin x}{\cos x}; \quad \cot x = \frac{\cos x}{\sin x}\)</li>
+                <li>\(\tan x \cdot \cot x = 1\)</li>
+                <li>\(1 + \tan^2 x = \frac{1}{\cos^2 x}\)</li>
+                <li>\(1 + \cot^2 x = \frac{1}{\sin^2 x}\)</li>
+            </ul>
+        </div>
+
+        <h4>b. Công thức cộng:</h4>
+        <div class="formula">
+            <ul>
+                <li>\(\sin(a \pm b) = \sin a \cos b \pm \cos a \sin b\)</li>
+                <li>\(\cos(a \pm b) = \cos a \cos b \mp \sin a \sin b\)</li>
+                <li>\(\tan(a \pm b) = \frac{\tan a \pm \tan b}{1 \mp \tan a \tan b}\)</li>
+            </ul>
+        </div>
+
+        <h4>c. Công thức nhân đôi:</h4>
+        <div class="formula">
+            <ul>
+                <li>\(\sin 2a = 2\sin a \cos a\)</li>
+                <li>\(\cos 2a = \cos^2 a - \sin^2 a = 2\cos^2 a - 1 = 1 - 2\sin^2 a\)</li>
+                <li>\(\tan 2a = \frac{2\tan a}{1 - \tan^2 a}\)</li>
+            </ul>
+        </div>
+
+        <h4>d. Công thức hạ bậc:</h4>
+        <div class="formula">
+            <ul>
+                <li>\(\sin^2 a = \frac{1 - \cos 2a}{2}\)</li>
+                <li>\(\cos^2 a = \frac{1 + \cos 2a}{2}\)</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h3>2. Phương Trình Lượng Giác Cơ Bản</h3>
+
+        <h4>a. Phương trình \(\sin x = m\):</h4>
+        <ul>
+            <li>\(|m| > 1\): Vô nghiệm.</li>
+            <li>\(|m| \le 1\): Đặt \(m = \sin \alpha\).
+                <div class="formula">
+                    \[x = \alpha + k2\pi \quad \text{hoặc} \quad x = \pi - \alpha + k2\pi \quad (k \in \mathbb{Z})\]
+                </div>
+            </li>
+        </ul>
+
+        <h4>b. Phương trình \(\cos x = m\):</h4>
+        <ul>
+            <li>\(|m| > 1\): Vô nghiệm.</li>
+            <li>\(|m| \le 1\): Đặt \(m = \cos \alpha\).
+                <div class="formula">
+                    \[x = \pm \alpha + k2\pi \quad (k \in \mathbb{Z})\]
+                </div>
+            </li>
+        </ul>
+
+        <h4>c. Phương trình \(\tan x = m\):</h4>
+        <ul>
+            <li>Luôn có nghiệm. Đặt \(m = \tan \alpha\).
+                <div class="formula">
+                    \[x = \alpha + k\pi \quad (k \in \mathbb{Z})\]
+                </div>
+            </li>
+        </ul>
+
+        <h4>d. Phương trình \(\cot x = m\):</h4>
+        <ul>
+            <li>Luôn có nghiệm. Đặt \(m = \cot \alpha\).
+                <div class="formula">
+                    \[x = \alpha + k\pi \quad (k \in \mathbb{Z})\]
+                </div>
+            </li>
+        </ul>
+
+        <div class="note">
+            <strong>Lưu ý:</strong> Các trường hợp đặc biệt bằng 0, 1, -1.
+        </div>
+
+        <hr>
+
+        <h3>3. Cấp Số Nhân (CSN)</h3>
+        <p>Cho dãy số \((u_n)\) là cấp số nhân với công bội \(q\).</p>
+        <div class="formula">
+            <ul>
+                <li><strong>Định nghĩa:</strong> \(u_{n+1} = u_n \cdot q\)</li>
+                <li><strong>Số hạng tổng quát:</strong> \(u_n = u_1 \cdot q^{n-1} \quad (n \ge 2)\)</li>
+                <li><strong>Tính chất:</strong> \(u_k^2 = u_{k-1} \cdot u_{k+1} \quad (k \ge 2)\)</li>
+                <li><strong>Tổng n số hạng đầu:</strong> \(S_n = \frac{u_1(1 - q^n)}{1 - q} \quad (q \ne 1)\)</li>
+                <li><strong>Tổng CSN lùi vô hạn \((|q| < 1)\):</strong> \(S = \frac{u_1}{1 - q}\)</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h3>4. Giới Hạn Dãy Số</h3>
+        
+        <h4>a. Giới hạn cơ bản:</h4>
+        <div class="formula">
+            <ul>
+                <li>\(\lim \frac{1}{n} = 0; \quad \lim \frac{1}{n^k} = 0\)</li>
+                <li>\(\lim q^n = 0\) nếu \(|q| < 1\); \(\lim q^n = +\infty\) nếu \(q > 1\).</li>
+                <li>\(\lim C = C\) (C là hằng số).</li>
+            </ul>
+        </div>
+
+        <h4>b. Phương pháp giải toán:</h4>
+        <ul>
+            <li><strong>Dạng \(\frac{\infty}{\infty}\):</strong> Chia cả tử và mẫu cho lũy thừa cao nhất của \(n\) (hoặc cơ số lớn nhất trong mũ \(n\)).</li>
+            <li><strong>Dạng \(\infty - \infty\) (chứa căn):</strong> Nhân liên hợp.</li>
+        </ul>
+
+        <hr>
+
+        <h3>5. Giới Hạn Hàm Số</h3>
+        
+        <h4>a. Các dạng vô định thường gặp:</h4>
+        <ul>
+            <li><strong>\(\frac{0}{0}\):</strong> Phân tích nhân tử, rút gọn rồi thay số.</li>
+            <li><strong>\(\frac{\infty}{\infty}\):</strong> Chia cho số hạng bậc cao nhất của biến.</li>
+            <li><strong>\(\infty - \infty\):</strong> Nhân liên hợp.</li>
+        </ul>
+
+        <h4>b. Giới hạn một bên:</h4>
+        <div class="formula">
+            <ul>
+                <li>\(\lim_{x \to x_0^+} f(x)\): Giới hạn phải (\(x > x_0\)).</li>
+                <li>\(\lim_{x \to x_0^-} f(x)\): Giới hạn trái (\(x < x_0\)).</li>
+                <li><strong>Tồn tại giới hạn:</strong> \(\lim_{x \to x_0} f(x) = L \Leftrightarrow \lim_{x \to x_0^+} f(x) = \lim_{x \to x_0^-} f(x) = L\).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h3>6. Hàm Số Liên Tục</h3>
+        <ul>
+            <li><strong>Tại một điểm \(x_0\):</strong> Hàm số \(y=f(x)\) liên tục tại \(x_0\) khi và chỉ khi:
+                <div class="formula">
+                    \[\lim_{x \to x_0} f(x) = f(x_0)\]
+                </div>
+            </li>
+            <li><strong>Trên một khoảng:</strong> Liên tục tại mọi điểm thuộc khoảng đó.</li>
+            <li><strong>Định lý giá trị trung gian:</strong> Nếu \(f(x)\) liên tục trên \([a, b]\) và \(f(a) \cdot f(b) < 0\) thì tồn tại ít nhất một số \(c \in (a, b)\) sao cho \(f(c) = 0\) (Phương trình có ít nhất 1 nghiệm).</li>
+        </ul>
+
+        <hr>
+
+        <h3>7. Thống Kê (Mẫu số liệu ghép nhóm)</h3>
+        <div class="formula">
+            <ul>
+                <li><strong>Giá trị đại diện của nhóm \([a; b)\):</strong> \(x_i = \frac{a+b}{2}\).</li>
+                <li><strong>Số trung bình cộng \((\bar{x})\):</strong>
+                    \[\bar{x} = \frac{m_1x_1 + m_2x_2 + \dots + m_kx_k}{n}\]
+                    (với \(m_i\) là tần số, \(x_i\) là giá trị đại diện).
+                </li>
+                <li><strong>Trung vị \((M_e)\):</strong> Xác định nhóm chứa trung vị, dùng công thức nội suy.</li>
+                <li><strong>Mốt \((M_o)\):</strong> Nhóm có tần số lớn nhất.</li>
+                <li><strong>Các số đặc trưng đo độ phân tán:</strong> Khoảng biến thiên, Khoảng tứ phân vị, Phương sai \((s^2)\), Độ lệch chuẩn \((s)\).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2>PHẦN II: HÌNH HỌC KHÔNG GIAN</h2>
+
+        <h3>1. Đại Cương: Điểm, Đường Thẳng, Mặt Phẳng</h3>
+        <ul>
+            <li><strong>Tiên đề:</strong> Qua 3 điểm không thẳng hàng xác định duy nhất 1 mặt phẳng.</li>
+            <li><strong>Giao tuyến:</strong> Muốn tìm giao tuyến của 2 mặt phẳng \((P)\) và \((Q)\), ta tìm 2 điểm chung phân biệt. Đường thẳng đi qua 2 điểm đó là giao tuyến.</li>
+            <li><strong>Vị trí tương đối của hai đường thẳng:</strong>
+                <ul>
+                    <li>Cắt nhau (cùng mp, có 1 điểm chung).</li>
+                    <li>Song song (cùng mp, không có điểm chung).</li>
+                    <li>Trùng nhau.</li>
+                    <li><strong>Chéo nhau:</strong> Không cùng nằm trong một mặt phẳng nào.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <hr>
+
+        <h3>2. Hai Đường Thẳng Song Song</h3>
+        <ul>
+            <li><strong>Định nghĩa:</strong> Cùng nằm trong một mặt phẳng và không có điểm chung.</li>
+            <li><strong>Tính chất:</strong>
+                <ul>
+                    <li>Trong không gian, qua một điểm nằm ngoài đường thẳng, có duy nhất một đường thẳng song song với đường thẳng đó.</li>
+                    <li>Hai đường thẳng phân biệt cùng song song với đường thẳng thứ 3 thì song song với nhau (\(a//b, b//c \Rightarrow a//c\)).</li>
+                </ul>
+            </li>
+            <li><strong>Định lý giao tuyến (Quan trọng):</strong> Nếu 3 mặt phẳng cắt nhau theo 3 giao tuyến phân biệt thì 3 giao tuyến đó hoặc đồng quy hoặc đôi một song song.
+                <div class="note">
+                    <strong>Hệ quả:</strong> Nếu hai mặt phẳng chứa hai đường thẳng song song thì giao tuyến của chúng (nếu có) cũng song song với hai đường thẳng đó (hoặc trùng với một trong hai).
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+
+        <h3>3. Đường Thẳng Song Song Với Mặt Phẳng</h3>
+        <ul>
+            <li><strong>Định nghĩa:</strong> Đường thẳng \(d\) và mặt phẳng \((\alpha)\) không có điểm chung.</li>
+            <li><strong>Điều kiện (Phương pháp chứng minh):</strong> Muốn chứng minh \(d // (\alpha)\), ta chứng minh \(d\) song song với một đường thẳng \(d'\) nằm trong \((\alpha)\).
+                <div class="formula">
+                    \[\begin{cases} d \not\subset (\alpha) \\ d' \subset (\alpha) \\ d // d' \end{cases} \Rightarrow d // (\alpha)\]
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+
+        <h3>4. Hai Mặt Phẳng Song Song</h3>
+        <ul>
+            <li><strong>Định nghĩa:</strong> Hai mặt phẳng \((\alpha)\) và \((\beta)\) không có điểm chung.</li>
+            <li><strong>Điều kiện (Phương pháp chứng minh):</strong> Muốn chứng minh \((\alpha) // (\beta)\), ta chứng minh trong \((\alpha)\) có hai đường thẳng cắt nhau \(a, b\) cùng song song với \((\beta)\) (hoặc song song với 2 đường thẳng cắt nhau \(a', b'\) trong \((\beta)\)).
+                <div class="formula">
+                    \[\begin{cases} a, b \subset (\alpha); \, a \cap b = I \\ a // (\beta) \\ b // (\beta) \end{cases} \Rightarrow (\alpha) // (\beta)\]
+                </div>
+            </li>
+            <li><strong>Tính chất:</strong>
+                <ul>
+                    <li>Nếu hai mặt phẳng song song thì mọi đường thẳng nằm trong mặt này đều song song với mặt kia.</li>
+                    <li><strong>Định lý Thales trong không gian:</strong> Ba mặt phẳng đôi một song song chắn trên hai cát tuyến bất kỳ các đoạn thẳng tương ứng tỉ lệ.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <hr>
+
+        <div class="advice">
+            <h3>LỜI KHUYÊN ÔN TẬP</h3>
+            <ol>
+                <li><strong>Đại số:</strong> Học thuộc công thức lượng giác (quan trọng nhất). Với giới hạn, hãy nắm chắc cách khử dạng vô định.</li>
+                <li><strong>Hình học:</strong> Vẽ hình không gian to, rõ ràng, nét đứt nét liền chính xác. Nắm vững phương pháp tìm giao tuyến và chứng minh song song (đường // đường → đường // mặt → mặt // mặt).</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
