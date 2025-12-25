@@ -3,435 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tài Liệu Ôn Tập Toán - THPT</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+    <title>Sổ Tay Toán 11 - Ôn Tập Chi Tiết (Từ A-Z)</title>
+    
+    <!-- Cấu hình MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary-color: #0d6efd; /* Xanh dương đậm */
+            --secondary-color: #d63384; /* Hồng đậm */
+            --highlight-bg: #e7f1ff; /* Nền xanh nhạt cho giải thích */
+            --formula-bg: #f8f9fa; /* Nền xám nhạt cho công thức */
+            --border-color: #dee2e6;
+            --text-color: #212529;
         }
 
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: "Segoe UI", "Times New Roman", sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
+            color: var(--text-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fff;
+            font-size: 18px;
+            transition: font-size 0.2s ease;
         }
 
-        .no-print {
+        /* Bảng điều khiển */
+        .control-panel {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid #ddd;
         }
 
-        .print-btn {
-            background: #4CAF50;
+        .btn {
+            background-color: var(--primary-color);
             color: white;
-            padding: 12px 24px;
             border: none;
-            border-radius: 5px;
+            padding: 8px 16px;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background 0.3s;
+            border-radius: 6px;
+            transition: all 0.2s;
         }
 
-        .print-btn:hover {
-            background: #45a049;
+        .btn:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-1px);
         }
 
-        .container {
-            max-width: 210mm;
-            margin: 0 auto;
-            background: white;
-            padding: 20mm;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        .btn-font {
+            width: 45px;
         }
 
+        /* Tiêu đề */
         h1 {
             text-align: center;
-            color: #2c3e50;
-            font-size: 24pt;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            border-bottom: 3px solid #2c3e50;
-            padding-bottom: 10px;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            font-size: 2em;
         }
 
         h2 {
-            color: #34495e;
-            font-size: 18pt;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            border-left: 5px solid #3498db;
-            padding-left: 15px;
+            background: linear-gradient(90deg, var(--primary-color), #6610f2);
+            color: white;
+            padding: 12px 20px;
+            margin-top: 50px;
+            border-radius: 8px;
+            font-size: 1.5em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         h3 {
-            color: #34495e;
-            font-size: 14pt;
-            margin-top: 20px;
+            color: var(--secondary-color);
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 35px;
+            font-size: 1.3em;
+        }
+
+        /* Các khối nội dung */
+        .concept-box {
+            background-color: var(--highlight-bg);
+            border: 1px solid #b6d4fe;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .concept-title {
+            font-weight: bold;
+            color: #052c65;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 10px;
-            font-weight: bold;
+            font-size: 1.1em;
         }
 
-        h4 {
-            color: #555;
-            font-size: 12pt;
-            margin-top: 15px;
-            margin-bottom: 8px;
-            font-weight: bold;
-            font-style: italic;
+        .formula-box {
+            background-color: var(--formula-bg);
+            border-left: 5px solid #198754; /* Màu xanh lá */
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
         }
 
-        p {
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
             margin-bottom: 10px;
             text-align: justify;
         }
 
-        ul {
-            margin-left: 30px;
-            margin-bottom: 10px;
+        strong {
+            color: #000;
         }
 
-        li {
-            margin-bottom: 8px;
-        }
-
-        .formula {
-            background: #f8f9fa;
-            padding: 10px 15px;
-            margin: 10px 0;
-            border-left: 4px solid #3498db;
-            border-radius: 3px;
-        }
-
-        .note {
-            background: #fff3cd;
-            padding: 10px 15px;
-            margin: 15px 0;
-            border-left: 4px solid #ffc107;
-            border-radius: 3px;
-            font-style: italic;
-        }
-
-        .advice {
-            background: #d4edda;
-            padding: 15px;
-            margin: 20px 0;
-            border-left: 4px solid #28a745;
-            border-radius: 3px;
-        }
-
-        .advice h3 {
-            color: #155724;
-            margin-top: 0;
-        }
-
-        hr {
-            border: none;
-            border-top: 2px solid #ddd;
-            margin: 30px 0;
-        }
-
+        /* In ấn */
         @media print {
-            body {
-                background: white;
+            .control-panel { display: none; }
+            body { 
+                font-size: 13pt !important; 
+                color: #000;
             }
-
-            .no-print {
-                display: none;
-            }
-
-            .container {
-                max-width: 100%;
-                box-shadow: none;
-                padding: 15mm;
-            }
-
-            h1 {
-                font-size: 20pt;
-            }
-
             h2 {
-                font-size: 16pt;
-                page-break-after: avoid;
+                background: none;
+                color: #000;
+                border: 2px solid #000;
+                page-break-before: always;
             }
-
-            h3 {
-                font-size: 13pt;
-                page-break-after: avoid;
-            }
-
-            h4 {
-                font-size: 11pt;
-            }
-
-            .formula, .note, .advice {
-                page-break-inside: avoid;
-            }
-
-            @page {
-                size: A4;
-                margin: 15mm;
-            }
+            h1 { page-break-before: avoid; }
+            .concept-box { border: 1px dashed #666; background: none; }
+            .formula-box { border-left: 5px solid #000; background: none; }
+            a { text-decoration: none; color: #000; }
         }
     </style>
 </head>
 <body>
-    <div class="no-print">
-        <button class="print-btn" onclick="window.print()">🖨️ In / Xuất PDF</button>
+
+    <!-- Bảng điều khiển -->
+    <div class="control-panel">
+        <button class="btn btn-font" onclick="adjustFontSize(-2)" title="Giảm cỡ chữ">A-</button>
+        <button class="btn btn-font" onclick="adjustFontSize(2)" title="Tăng cỡ chữ">A+</button>
+        <button class="btn" onclick="window.print()" title="In">🖨️ In PDF</button>
     </div>
 
-    <div class="container">
-        <h1>Tài Liệu Ôn Tập Toán: Đại Số & Hình Học</h1>
+    <h1>SỔ TAY TOÁN 11<br><span style="font-size: 0.6em; color: #555; font-weight: normal;">LÝ THUYẾT & CÔNG THỨC TRỌNG TÂM (TỪ CƠ BẢN ĐẾN NÂNG CAO)</span></h1>
 
-        <h2>PHẦN I: ĐẠI SỐ & GIẢI TÍCH</h2>
+    <!-- PHẦN 1 -->
+    <h2>PHẦN 1: ĐẠI SỐ & GIẢI TÍCH</h2>
 
-        <h3>1. Công Thức Lượng Giác</h3>
-        
-        <h4>a. Hệ thức cơ bản:</h4>
-        <div class="formula">
-            <ul>
-                <li>\(\sin^2 x + \cos^2 x = 1\)</li>
-                <li>\(\tan x = \frac{\sin x}{\cos x}; \quad \cot x = \frac{\cos x}{\sin x}\)</li>
-                <li>\(\tan x \cdot \cot x = 1\)</li>
-                <li>\(1 + \tan^2 x = \frac{1}{\cos^2 x}\)</li>
-                <li>\(1 + \cot^2 x = \frac{1}{\sin^2 x}\)</li>
-            </ul>
-        </div>
-
-        <h4>b. Công thức cộng:</h4>
-        <div class="formula">
-            <ul>
-                <li>\(\sin(a \pm b) = \sin a \cos b \pm \cos a \sin b\)</li>
-                <li>\(\cos(a \pm b) = \cos a \cos b \mp \sin a \sin b\)</li>
-                <li>\(\tan(a \pm b) = \frac{\tan a \pm \tan b}{1 \mp \tan a \tan b}\)</li>
-            </ul>
-        </div>
-
-        <h4>c. Công thức nhân đôi:</h4>
-        <div class="formula">
-            <ul>
-                <li>\(\sin 2a = 2\sin a \cos a\)</li>
-                <li>\(\cos 2a = \cos^2 a - \sin^2 a = 2\cos^2 a - 1 = 1 - 2\sin^2 a\)</li>
-                <li>\(\tan 2a = \frac{2\tan a}{1 - \tan^2 a}\)</li>
-            </ul>
-        </div>
-
-        <h4>d. Công thức hạ bậc:</h4>
-        <div class="formula">
-            <ul>
-                <li>\(\sin^2 a = \frac{1 - \cos 2a}{2}\)</li>
-                <li>\(\cos^2 a = \frac{1 + \cos 2a}{2}\)</li>
-            </ul>
-        </div>
-
-        <hr>
-
-        <h3>2. Phương Trình Lượng Giác Cơ Bản</h3>
-
-        <h4>a. Phương trình \(\sin x = m\):</h4>
-        <ul>
-            <li>\(|m| > 1\): Vô nghiệm.</li>
-            <li>\(|m| \le 1\): Đặt \(m = \sin \alpha\).
-                <div class="formula">
-                    \[x = \alpha + k2\pi \quad \text{hoặc} \quad x = \pi - \alpha + k2\pi \quad (k \in \mathbb{Z})\]
-                </div>
-            </li>
-        </ul>
-
-        <h4>b. Phương trình \(\cos x = m\):</h4>
-        <ul>
-            <li>\(|m| > 1\): Vô nghiệm.</li>
-            <li>\(|m| \le 1\): Đặt \(m = \cos \alpha\).
-                <div class="formula">
-                    \[x = \pm \alpha + k2\pi \quad (k \in \mathbb{Z})\]
-                </div>
-            </li>
-        </ul>
-
-        <h4>c. Phương trình \(\tan x = m\):</h4>
-        <ul>
-            <li>Luôn có nghiệm. Đặt \(m = \tan \alpha\).
-                <div class="formula">
-                    \[x = \alpha + k\pi \quad (k \in \mathbb{Z})\]
-                </div>
-            </li>
-        </ul>
-
-        <h4>d. Phương trình \(\cot x = m\):</h4>
-        <ul>
-            <li>Luôn có nghiệm. Đặt \(m = \cot \alpha\).
-                <div class="formula">
-                    \[x = \alpha + k\pi \quad (k \in \mathbb{Z})\]
-                </div>
-            </li>
-        </ul>
-
-        <div class="note">
-            <strong>Lưu ý:</strong> Các trường hợp đặc biệt bằng 0, 1, -1.
-        </div>
-
-        <hr>
-
-        <h3>3. Cấp Số Nhân (CSN)</h3>
-        <p>Cho dãy số \((u_n)\) là cấp số nhân với công bội \(q\).</p>
-        <div class="formula">
-            <ul>
-                <li><strong>Định nghĩa:</strong> \(u_{n+1} = u_n \cdot q\)</li>
-                <li><strong>Số hạng tổng quát:</strong> \(u_n = u_1 \cdot q^{n-1} \quad (n \ge 2)\)</li>
-                <li><strong>Tính chất:</strong> \(u_k^2 = u_{k-1} \cdot u_{k+1} \quad (k \ge 2)\)</li>
-                <li><strong>Tổng n số hạng đầu:</strong> \(S_n = \frac{u_1(1 - q^n)}{1 - q} \quad (q \ne 1)\)</li>
-                <li><strong>Tổng CSN lùi vô hạn \((|q| < 1)\):</strong> \(S = \frac{u_1}{1 - q}\)</li>
-            </ul>
-        </div>
-
-        <hr>
-
-        <h3>4. Giới Hạn Dãy Số</h3>
-        
-        <h4>a. Giới hạn cơ bản:</h4>
-        <div class="formula">
-            <ul>
-                <li>\(\lim \frac{1}{n} = 0; \quad \lim \frac{1}{n^k} = 0\)</li>
-                <li>\(\lim q^n = 0\) nếu \(|q| < 1\); \(\lim q^n = +\infty\) nếu \(q > 1\).</li>
-                <li>\(\lim C = C\) (C là hằng số).</li>
-            </ul>
-        </div>
-
-        <h4>b. Phương pháp giải toán:</h4>
-        <ul>
-            <li><strong>Dạng \(\frac{\infty}{\infty}\):</strong> Chia cả tử và mẫu cho lũy thừa cao nhất của \(n\) (hoặc cơ số lớn nhất trong mũ \(n\)).</li>
-            <li><strong>Dạng \(\infty - \infty\) (chứa căn):</strong> Nhân liên hợp.</li>
-        </ul>
-
-        <hr>
-
-        <h3>5. Giới Hạn Hàm Số</h3>
-        
-        <h4>a. Các dạng vô định thường gặp:</h4>
-        <ul>
-            <li><strong>\(\frac{0}{0}\):</strong> Phân tích nhân tử, rút gọn rồi thay số.</li>
-            <li><strong>\(\frac{\infty}{\infty}\):</strong> Chia cho số hạng bậc cao nhất của biến.</li>
-            <li><strong>\(\infty - \infty\):</strong> Nhân liên hợp.</li>
-        </ul>
-
-        <h4>b. Giới hạn một bên:</h4>
-        <div class="formula">
-            <ul>
-                <li>\(\lim_{x \to x_0^+} f(x)\): Giới hạn phải (\(x > x_0\)).</li>
-                <li>\(\lim_{x \to x_0^-} f(x)\): Giới hạn trái (\(x < x_0\)).</li>
-                <li><strong>Tồn tại giới hạn:</strong> \(\lim_{x \to x_0} f(x) = L \Leftrightarrow \lim_{x \to x_0^+} f(x) = \lim_{x \to x_0^-} f(x) = L\).</li>
-            </ul>
-        </div>
-
-        <hr>
-
-        <h3>6. Hàm Số Liên Tục</h3>
-        <ul>
-            <li><strong>Tại một điểm \(x_0\):</strong> Hàm số \(y=f(x)\) liên tục tại \(x_0\) khi và chỉ khi:
-                <div class="formula">
-                    \[\lim_{x \to x_0} f(x) = f(x_0)\]
-                </div>
-            </li>
-            <li><strong>Trên một khoảng:</strong> Liên tục tại mọi điểm thuộc khoảng đó.</li>
-            <li><strong>Định lý giá trị trung gian:</strong> Nếu \(f(x)\) liên tục trên \([a, b]\) và \(f(a) \cdot f(b) < 0\) thì tồn tại ít nhất một số \(c \in (a, b)\) sao cho \(f(c) = 0\) (Phương trình có ít nhất 1 nghiệm).</li>
-        </ul>
-
-        <hr>
-
-        <h3>7. Thống Kê (Mẫu số liệu ghép nhóm)</h3>
-        <div class="formula">
-            <ul>
-                <li><strong>Giá trị đại diện của nhóm \([a; b)\):</strong> \(x_i = \frac{a+b}{2}\).</li>
-                <li><strong>Số trung bình cộng \((\bar{x})\):</strong>
-                    \[\bar{x} = \frac{m_1x_1 + m_2x_2 + \dots + m_kx_k}{n}\]
-                    (với \(m_i\) là tần số, \(x_i\) là giá trị đại diện).
-                </li>
-                <li><strong>Trung vị \((M_e)\):</strong> Xác định nhóm chứa trung vị, dùng công thức nội suy.</li>
-                <li><strong>Mốt \((M_o)\):</strong> Nhóm có tần số lớn nhất.</li>
-                <li><strong>Các số đặc trưng đo độ phân tán:</strong> Khoảng biến thiên, Khoảng tứ phân vị, Phương sai \((s^2)\), Độ lệch chuẩn \((s)\).</li>
-            </ul>
-        </div>
-
-        <hr>
-
-        <h2>PHẦN II: HÌNH HỌC KHÔNG GIAN</h2>
-
-        <h3>1. Đại Cương: Điểm, Đường Thẳng, Mặt Phẳng</h3>
-        <ul>
-            <li><strong>Tiên đề:</strong> Qua 3 điểm không thẳng hàng xác định duy nhất 1 mặt phẳng.</li>
-            <li><strong>Giao tuyến:</strong> Muốn tìm giao tuyến của 2 mặt phẳng \((P)\) và \((Q)\), ta tìm 2 điểm chung phân biệt. Đường thẳng đi qua 2 điểm đó là giao tuyến.</li>
-            <li><strong>Vị trí tương đối của hai đường thẳng:</strong>
-                <ul>
-                    <li>Cắt nhau (cùng mp, có 1 điểm chung).</li>
-                    <li>Song song (cùng mp, không có điểm chung).</li>
-                    <li>Trùng nhau.</li>
-                    <li><strong>Chéo nhau:</strong> Không cùng nằm trong một mặt phẳng nào.</li>
-                </ul>
-            </li>
-        </ul>
-
-        <hr>
-
-        <h3>2. Hai Đường Thẳng Song Song</h3>
-        <ul>
-            <li><strong>Định nghĩa:</strong> Cùng nằm trong một mặt phẳng và không có điểm chung.</li>
-            <li><strong>Tính chất:</strong>
-                <ul>
-                    <li>Trong không gian, qua một điểm nằm ngoài đường thẳng, có duy nhất một đường thẳng song song với đường thẳng đó.</li>
-                    <li>Hai đường thẳng phân biệt cùng song song với đường thẳng thứ 3 thì song song với nhau (\(a//b, b//c \Rightarrow a//c\)).</li>
-                </ul>
-            </li>
-            <li><strong>Định lý giao tuyến (Quan trọng):</strong> Nếu 3 mặt phẳng cắt nhau theo 3 giao tuyến phân biệt thì 3 giao tuyến đó hoặc đồng quy hoặc đôi một song song.
-                <div class="note">
-                    <strong>Hệ quả:</strong> Nếu hai mặt phẳng chứa hai đường thẳng song song thì giao tuyến của chúng (nếu có) cũng song song với hai đường thẳng đó (hoặc trùng với một trong hai).
-                </div>
-            </li>
-        </ul>
-
-        <hr>
-
-        <h3>3. Đường Thẳng Song Song Với Mặt Phẳng</h3>
-        <ul>
-            <li><strong>Định nghĩa:</strong> Đường thẳng \(d\) và mặt phẳng \((\alpha)\) không có điểm chung.</li>
-            <li><strong>Điều kiện (Phương pháp chứng minh):</strong> Muốn chứng minh \(d // (\alpha)\), ta chứng minh \(d\) song song với một đường thẳng \(d'\) nằm trong \((\alpha)\).
-                <div class="formula">
-                    \[\begin{cases} d \not\subset (\alpha) \\ d' \subset (\alpha) \\ d // d' \end{cases} \Rightarrow d // (\alpha)\]
-                </div>
-            </li>
-        </ul>
-
-        <hr>
-
-        <h3>4. Hai Mặt Phẳng Song Song</h3>
-        <ul>
-            <li><strong>Định nghĩa:</strong> Hai mặt phẳng \((\alpha)\) và \((\beta)\) không có điểm chung.</li>
-            <li><strong>Điều kiện (Phương pháp chứng minh):</strong> Muốn chứng minh \((\alpha) // (\beta)\), ta chứng minh trong \((\alpha)\) có hai đường thẳng cắt nhau \(a, b\) cùng song song với \((\beta)\) (hoặc song song với 2 đường thẳng cắt nhau \(a', b'\) trong \((\beta)\)).
-                <div class="formula">
-                    \[\begin{cases} a, b \subset (\alpha); \, a \cap b = I \\ a // (\beta) \\ b // (\beta) \end{cases} \Rightarrow (\alpha) // (\beta)\]
-                </div>
-            </li>
-            <li><strong>Tính chất:</strong>
-                <ul>
-                    <li>Nếu hai mặt phẳng song song thì mọi đường thẳng nằm trong mặt này đều song song với mặt kia.</li>
-                    <li><strong>Định lý Thales trong không gian:</strong> Ba mặt phẳng đôi một song song chắn trên hai cát tuyến bất kỳ các đoạn thẳng tương ứng tỉ lệ.</li>
-                </ul>
-            </li>
-        </ul>
-
-        <hr>
-
-        <div class="advice">
-            <h3>LỜI KHUYÊN ÔN TẬP</h3>
-            <ol>
-                <li><strong>Đại số:</strong> Học thuộc công thức lượng giác (quan trọng nhất). Với giới hạn, hãy nắm chắc cách khử dạng vô định.</li>
-                <li><strong>Hình học:</strong> Vẽ hình không gian to, rõ ràng, nét đứt nét liền chính xác. Nắm vững phương pháp tìm giao tuyến và chứng minh song song (đường // đường → đường // mặt → mặt // mặt).</li>
-            </ol>
-        </div>
+    <h3>I. HÀM SỐ LƯỢNG GIÁC & PHƯƠNG TRÌNH</h3>
+    
+    <div class="concept-box">
+        <div class="concept-title">💡 Hiểu bản chất (Từ số 0)</div>
+        <p><strong>Lượng giác là gì?</strong> Là việc nghiên cứu mối quan hệ giữa góc và cạnh. Hãy nhớ đường tròn lượng giác: Trục đứng là Sin (Sin đứng), trục ngang là Cos (Cos nằm).</p>
+        <p><strong>Tại sao nghiệm lại có đuôi $k2\pi$?</strong> Vì đường tròn lượng giác là một vòng lặp. Đi hết 1 vòng ($360^\circ$ hay $2\pi$) thì quay lại điểm cũ. $k$ là số vòng quay (nguyên).</p>
+        <p><strong>Nghiệm $k\pi$ dùng khi nào?</strong> Dùng cho $\tan, \cot$ hoặc khi hai điểm nghiệm đối xứng nhau qua tâm O.</p>
     </div>
+
+    <div class="formula-box">
+        <strong>1. Công thức cơ bản (Phải thuộc lòng):</strong>
+        <ul>
+            <li>$\sin^2 x + \cos^2 x = 1$ (Định lý Pythagoras trên đường tròn đơn vị)</li>
+            <li>$\tan x = \frac{\sin x}{\cos x}$ (Tan = Sin chia Cos); $\cot x = \frac{1}{\tan x}$</li>
+            <li>$1 + \tan^2 x = \frac{1}{\cos^2 x}$ (Dùng đổi từ Tan sang Cos và ngược lại)</li>
+        </ul>
+    </div>
+
+    <div class="formula-box">
+        <strong>2. Phương trình lượng giác cơ bản:</strong><br>
+        <em>Mẹo:</em> Đưa về cùng tên (sin theo sin, cos theo cos).
+        <ul>
+            <li>$\sin x = \sin \alpha \Leftrightarrow \left[ \begin{aligned} x &= \alpha + k2\pi \\ x &= \pi - \alpha + k2\pi \end{aligned} \right.$ (Sin bù: nghiệm kia là $\pi - \alpha$)</li>
+            <li>$\cos x = \cos \alpha \Leftrightarrow x = \pm \alpha + k2\pi$ (Cos đối: hai nghiệm trái dấu)</li>
+            <li>$\tan x = \tan \alpha \Leftrightarrow x = \alpha + k\pi$</li>
+        </ul>
+        <em>Lưu ý:</em> Phương trình $a\sin x + b\cos x = c$ chỉ có nghiệm nếu "Tổng bình phương hệ số lớn hơn C bình phương" ($a^2 + b^2 \ge c^2$).
+    </div>
+
+    <h3>II. TỔ HỢP & XÁC SUẤT</h3>
+
+    <div class="concept-box">
+        <div class="concept-title">💡 Hiểu bản chất: Phân biệt $C_n^k$ và $A_n^k$</div>
+        <p>Rất nhiều bạn nhầm lẫn hai cái này. Hãy nhớ quy tắc:</p>
+        <ul>
+            <li><strong>Tổ hợp ($C_n^k$ - Combination):</strong> Chỉ cần <strong>CHỌN</strong> ra, không quan tâm thứ tự. <br>
+                <em>Ví dụ:</em> Chọn 3 bạn đi lao động (Bạn A, B, C đi thì cũng giống C, B, A đi). Dùng $C$.</li>
+            <li><strong>Chỉnh hợp ($A_n^k$ - Arrangement):</strong> Chọn ra rồi phải <strong>XẾP THỨ TỰ</strong> (gắn chức vụ, gắn vị trí).<br>
+                <em>Ví dụ:</em> Chọn 3 bạn làm Lớp trưởng, Lớp phó, Bí thư. (A làm trưởng khác A làm phó). Dùng $A$.</li>
+        </ul>
+    </div>
+
+    <div class="formula-box">
+        <strong>1. Nhị thức Newton $(a+b)^n$:</strong>
+        <ul>
+            <li>Là công thức để khai triển hằng đẳng thức mũ lớn.</li>
+            <li>Số hạng tổng quát: $T_{k+1} = C_n^k \cdot a^{n-k} \cdot b^k$.</li>
+            <li>Mẹo làm bài tìm hệ số của $x^m$: Viết số hạng tổng quát, gom hết $x$ lại một chỗ, cho số mũ của $x$ bằng $m$ rồi giải tìm $k$.</li>
+        </ul>
+        
+        <strong>2. Xác suất cổ điển:</strong>
+        <ul>
+            <li>$P(A) = \frac{\text{Số trường hợp thuận lợi}}{\text{Tổng số trường hợp có thể xảy ra}}$</li>
+            <li>Quy tắc nhân xác suất: Nếu A và B độc lập (việc này xảy ra không ảnh hưởng việc kia), thì $P(A \text{ và } B) = P(A) \cdot P(B)$.</li>
+        </ul>
+    </div>
+
+    <h3>III. DÃY SỐ - CẤP SỐ CỘNG (CSC) - CẤP SỐ NHÂN (CSN)</h3>
+
+    <div class="concept-box">
+        <div class="concept-title">💡 Hiểu bản chất</div>
+        <ul>
+            <li><strong>Cấp số CỘNG:</strong> Số sau bằng số trước <strong>CỘNG</strong> thêm một số không đổi ($d$). Giống như leo cầu thang, mỗi bậc cao thêm đúng $d$ cm.<br>
+            $\rightarrow$ Muốn tìm số thứ $n$, lấy số đầu cộng thêm $(n-1)$ lần $d$.</li>
+            
+            <li><strong>Cấp số NHÂN:</strong> Số sau bằng số trước <strong>NHÂN</strong> thêm một số không đổi ($q$). Giống như tế bào phân chia (nhân đôi, nhân ba...).<br>
+            $\rightarrow$ Muốn tìm số thứ $n$, lấy số đầu nhân với $q$ lũy thừa $(n-1)$.</li>
+        </ul>
+    </div>
+
+    <div class="formula-box">
+        <strong>Bảng so sánh công thức:</strong>
+        <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+            <tr style="border-bottom: 1px solid #000;">
+                <th style="text-align:left;">Đặc điểm</th>
+                <th style="text-align:left;">Cấp số cộng (CSC)</th>
+                <th style="text-align:left;">Cấp số nhân (CSN)</th>
+            </tr>
+            <tr>
+                <td>Số hạng tổng quát</td>
+                <td>$u_n = u_1 + (n-1)d$</td>
+                <td>$u_n = u_1 \cdot q^{n-1}$</td>
+            </tr>
+            <tr>
+                <td>Tính chất giữa</td>
+                <td>$u_k = \frac{u_{k-1} + u_{k+1}}{2}$ (TBC)</td>
+                <td>$u_k^2 = u_{k-1} \cdot u_{k+1}$ (TBN)</td>
+            </tr>
+            <tr>
+                <td>Tổng $n$ số đầu</td>
+                <td>$S_n = \frac{n(u_1 + u_n)}{2}$</td>
+                <td>$S_n = u_1 \frac{1-q^n}{1-q}$</td>
+            </tr>
+        </table>
+        <br>
+        <em>Đặc biệt:</em> Tổng CSN lùi vô hạn ($|q|<1$): $S = \frac{u_1}{1-q}$.
+    </div>
+
+    <h3>IV. GIỚI HẠN (LIMIT) & HÀM SỐ LIÊN TỤC</h3>
+
+    <div class="concept-box">
+        <div class="concept-title">💡 Hiểu bản chất</div>
+        <p><strong>Lim là gì?</strong> Là giá trị mà hàm số "tiến tới" khi biến số chạy tới một điểm nào đó, nhưng không nhất thiết phải chạm vào điểm đó.</p>
+        <p><strong>Tại sao có dạng 0/0?</strong> Ví dụ $\frac{x^2-1}{x-1}$ khi $x \to 1$. Cả tử và mẫu đều bằng 0. Điều này không vô nghĩa, nó có nghĩa là cả tử và mẫu đều chứa một nhân tử chung làm cho nó bằng 0 (ở đây là $x-1$). Nhiệm vụ của bạn là triệt tiêu nhân tử đó đi.</p>
+        <p><strong>Hàm liên tục là gì?</strong> Là đồ thị của nó là một đường liền nét, không bị đứt gãy. Tại điểm gãy, giới hạn trái khác giới hạn phải hoặc hàm không xác định.</p>
+    </div>
+
+    <div class="formula-box">
+        <strong>Phương pháp giải nhanh:</strong>
+        <ul>
+            <li><strong>Dạng $\infty / \infty$:</strong> Chỉ quan tâm số mũ cao nhất.
+                <br>Ví dụ: $\lim \frac{2n^2 + 1}{3n^2 - n} = \frac{2}{3}$ (Lấy hệ số bậc cao nhất chia nhau).
+            </li>
+            <li><strong>Dạng $0/0$:</strong>
+                <ul>
+                    <li>Nếu là đa thức: Phân tích thành nhân tử rồi rút gọn.</li>
+                    <li>Nếu có căn: Nhân liên hợp ($\sqrt{A} - B \to \frac{A - B^2}{\sqrt{A} + B}$).</li>
+                </ul>
+            </li>
+            <li><strong>Hàm số liên tục tại $x_0$:</strong>
+                Kiểm tra 3 cái bằng nhau: $\lim_{x \to x_0^+} f(x) = \lim_{x \to x_0^-} f(x) = f(x_0)$.
+            </li>
+        </ul>
+    </div>
+
+    <h3>V. THỐNG KÊ (SỐ LIỆU GHÉP NHÓM)</h3>
+
+    <div class="concept-box">
+        <div class="concept-title">💡 Giải thích ý nghĩa các chỉ số</div>
+        <ul>
+            <li><strong>Số trung bình ($\bar{x}$):</strong> Giá trị trung bình cộng. Đại diện cho độ lớn chung của mẫu số liệu.</li>
+            <li><strong>Mốt ($M_o$):</strong> "Mốt" là thời thượng, là phổ biến nhất. Nhóm chứa Mốt là nhóm có tần số cao nhất (nhiều người rơi vào nhóm này nhất).</li>
+            <li><strong>Trung vị ($M_e$):</strong> Người đứng chính giữa hàng. Chia mẫu số liệu thành 2 nửa bằng nhau (50% nhỏ hơn, 50% lớn hơn).</li>
+            <li><strong>Tứ phân vị ($Q_1, Q_2, Q_3$):</strong> Chia mẫu số liệu thành 4 phần bằng nhau. $Q_2$ chính là Trung vị.</li>
+        </ul>
+    </div>
+
+    <!-- PHẦN 2 -->
+    <h2>PHẦN 2: HÌNH HỌC KHÔNG GIAN</h2>
+
+    <div class="concept-box">
+        <div class="concept-title">💡 Tưởng tượng hình không gian (Từ số 0)</div>
+        <p>Đừng nhìn hình vẽ như hình phẳng. Hãy tưởng tượng:</p>
+        <ul>
+            <li><strong>Mặt phẳng:</strong> Là sàn nhà, trần nhà, bức tường, mặt bàn.</li>
+            <li><strong>Đường thẳng:</strong> Là cây bút chì, mép tường, mép bàn.</li>
+            <li><strong>Giao tuyến:</strong> Là cái "khe" giao nhau giữa hai mặt phẳng. Ví dụ: Gáy sách là giao tuyến của 2 trang sách; Chân tường là giao tuyến của tường và sàn.</li>
+            <li><strong>Song song:</strong>
+                <ul>
+                    <li>Đường // Mặt: Cây bút để trên bàn, song song với mặt sàn nhà. Cây bút không bao giờ chạm sàn.</li>
+                    <li>Mặt // Mặt: Sàn nhà và trần nhà (không bao giờ gặp nhau).</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <h3>I. CÁC DẠNG BÀI TẬP CỐT LÕI</h3>
+
+    <div class="formula-box">
+        <strong>Dạng 1: Tìm giao tuyến của 2 mặt phẳng (P) và (Q)</strong>
+        <ul>
+            <li><em>Bước 1:</em> Tìm điểm chung thứ nhất (thường dễ thấy, ví dụ đỉnh S).</li>
+            <li><em>Bước 2:</em> Tìm điểm chung thứ hai HOẶC tìm phương giao tuyến.
+                <ul>
+                    <li>Nếu đáy có 2 đường song song (ví dụ $AD // BC$): Giao tuyến sẽ đi qua S và song song với cả AD và BC.</li>
+                    <li>Nếu 2 đường đáy cắt nhau tại I: Giao tuyến là đường thẳng SI.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="formula-box">
+        <strong>Dạng 2: Chứng minh đường thẳng d song song mặt phẳng (P)</strong>
+        <ul>
+            <li><em>Phương pháp:</em> Đừng cố chứng minh d song song với cả cái mặt phẳng (trừu tượng). Hãy tìm <strong>một đường thẳng a</strong> nằm trong (P) mà $d // a$.</li>
+            <li><em>Cách tìm a:</em> Thường dùng đường trung bình tam giác, hình bình hành hoặc định lý Thales đảo.</li>
+        </ul>
+    </div>
+
+    <div class="formula-box">
+        <strong>Dạng 3: Tìm thiết diện (Mặt cắt)</strong>
+        <ul>
+            <li>Tưởng tượng bạn dùng một con dao cắt ngang khối bánh hình chóp. Vết cắt để lại trên các mặt bên và mặt đáy tạo thành một đa giác khép kín. Đó là thiết diện.</li>
+            <li><em>Cách làm:</em> Tìm giao tuyến của mặt phẳng cắt với từng mặt của hình chóp. Nối các đoạn giao tuyến lại.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Khởi tạo kích thước font hiện tại
+        let currentSize = 18;
+
+        function adjustFontSize(amount) {
+            currentSize += amount;
+            
+            // Giới hạn kích thước font
+            if (currentSize < 14) currentSize = 14;
+            if (currentSize > 28) currentSize = 28;
+
+            document.body.style.fontSize = currentSize + 'px';
+        }
+    </script>
 </body>
 </html>
