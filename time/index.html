@@ -3,464 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Clock</title>
+    <title>Zen Focus & Time</title>
+    
+    <!-- Font chữ hiện đại từ Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600;800&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --primary-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --accent-color: #00f2fe;
+            --accent-secondary: #4facfe;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
+            /* Animated Gradient Background */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--primary-color);
+            overflow: hidden; /* Tránh thanh cuộn */
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container chính */
         .container {
-            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            padding: 2rem;
+            width: 90%;
             max-width: 1200px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 20px;
+            height: 80vh;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* Responsive cho Mobile/Tablet dọc */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem;
+                gap: 1.5rem;
+            }
+            body {
+                overflow-y: auto; /* Cho phép cuộn trên mobile nếu cần */
+                padding: 20px 0;
+            }
+        }
+
+        /* Glass Card Style */
         .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.3s ease;
+            flex: 1;
+            min-width: 300px;
+            height: 100%;
+            position: relative;
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
         }
 
-        .clock-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        /* --- PHẦN ĐỒNG HỒ --- */
+        .clock-container {
+            text-align: center;
         }
 
-        .clock-title {
-            color: white;
-            font-size: 24px;
-            font-weight: 300;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        .clock-display {
-            color: white;
-            font-size: 72px;
-            font-weight: 700;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-            letter-spacing: 5px;
-            font-variant-numeric: tabular-nums;
+        .time-display {
+            font-size: 6rem;
+            font-weight: 800;
+            line-height: 1;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            letter-spacing: -2px;
         }
 
         .date-display {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 20px;
-            margin-top: 20px;
-            font-weight: 300;
-        }
-
-        .pomodoro-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .pomodoro-title {
-            color: white;
-            font-size: 24px;
-            font-weight: 300;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 200;
+            margin-top: 1rem;
+            opacity: 0.9;
+            text-transform: uppercase;
             letter-spacing: 2px;
         }
 
+        @media (max-width: 768px) {
+            .time-display { font-size: 4rem; }
+            .date-display { font-size: 1rem; }
+            .card { padding: 2rem; height: auto; }
+        }
+
+        /* --- PHẦN POMODORO --- */
+        .pomodoro-container {
+            text-align: center;
+            width: 100%;
+        }
+
         .timer-display {
-            color: white;
-            font-size: 64px;
-            font-weight: 700;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-            margin: 20px 0;
-            font-variant-numeric: tabular-nums;
+            font-size: 5rem;
+            font-weight: 600;
+            margin: 1.5rem 0;
+            font-variant-numeric: tabular-nums; /* Giữ số không bị nhảy */
+            position: relative;
+            z-index: 2;
         }
 
-        .timer-label {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 18px;
-            margin-bottom: 30px;
+        .status-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
         }
 
+        /* Controls */
         .controls {
             display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            gap: 1rem;
             justify-content: center;
+            margin-bottom: 2rem;
         }
 
         .btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
+            border: none;
+            outline: none;
             padding: 12px 30px;
             border-radius: 50px;
-            cursor: pointer;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
-
-        .btn:active {
-            transform: scale(0.95);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary {
-            background: rgba(255, 255, 255, 0.25);
+            background: var(--primary-color);
+            color: #e73c7e; /* Lấy màu từ gradient */
         }
 
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: #fff;
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.5);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+
+        /* Settings Inputs */
         .settings {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
             width: 100%;
-            max-width: 400px;
         }
 
-        .setting-group {
+        .input-group {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            align-items: flex-start;
         }
 
-        .setting-label {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            font-weight: 500;
+        .input-group label {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-bottom: 4px;
         }
 
-        .setting-input {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        .time-input {
+            background: rgba(0,0,0,0.2);
+            border: none;
+            border-radius: 8px;
+            padding: 8px;
             color: white;
-            padding: 10px;
-            border-radius: 15px;
-            width: 80px;
+            width: 60px;
             text-align: center;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .time-input:focus {
+            outline: 2px solid rgba(255,255,255,0.5);
         }
 
-        .setting-input:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.25);
-        }
-
+        /* Progress Circle Background Effect */
         .progress-ring {
-            width: 200px;
-            height: 200px;
-            margin: 20px 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.05);
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .progress-ring-circle {
-            transition: stroke-dashoffset 0.3s;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
+        @media (max-width: 768px) {
+            .progress-ring { width: 220px; height: 220px; }
+            .timer-display { font-size: 3.5rem; }
         }
 
-        @media (max-width: 968px) {
-            .container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .clock-display {
-                font-size: 56px;
-            }
-
-            .timer-display {
-                font-size: 48px;
-            }
-
-            .card {
-                padding: 30px 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .clock-display {
-                font-size: 42px;
-            }
-
-            .timer-display {
-                font-size: 36px;
-            }
-
-            .clock-title, .pomodoro-title {
-                font-size: 20px;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            .settings {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        .pulse {
-            animation: pulse 1s ease-in-out infinite;
-        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <div class="card clock-card">
-            <h2 class="clock-title">THỜI GIAN HIỆN TẠI</h2>
-            <div class="clock-display" id="clock">00:00:00</div>
-            <div class="date-display" id="date">Loading...</div>
+        <!-- Card 1: Đồng hồ hiện tại -->
+        <div class="card">
+            <div class="clock-container">
+                <div class="time-display" id="clock">00:00:00</div>
+                <div class="date-display" id="date">Đang tải...</div>
+            </div>
         </div>
 
-        <div class="card pomodoro-card">
-            <h2 class="pomodoro-title">POMODORO TIMER</h2>
-            
-            <svg class="progress-ring">
-                <circle
-                    class="progress-ring-circle"
-                    stroke="rgba(255, 255, 255, 0.2)"
-                    stroke-width="8"
-                    fill="transparent"
-                    r="90"
-                    cx="100"
-                    cy="100"/>
-                <circle
-                    id="progress"
-                    class="progress-ring-circle"
-                    stroke="white"
-                    stroke-width="8"
-                    fill="transparent"
-                    r="90"
-                    cx="100"
-                    cy="100"
-                    stroke-dasharray="565.48"
-                    stroke-dashoffset="0"/>
-            </svg>
-
-            <div class="timer-display" id="timer">25:00</div>
-            <div class="timer-label" id="timerLabel">Làm việc</div>
-
-            <div class="controls">
-                <button class="btn btn-primary" id="startBtn">Bắt đầu</button>
-                <button class="btn" id="pauseBtn">Tạm dừng</button>
-                <button class="btn" id="resetBtn">Đặt lại</button>
-            </div>
-
-            <div class="settings">
-                <div class="setting-group">
-                    <label class="setting-label">Làm việc (phút)</label>
-                    <input type="number" class="setting-input" id="workTime" value="25" min="1" max="60">
+        <!-- Card 2: Pomodoro -->
+        <div class="card">
+            <div class="pomodoro-container">
+                <div class="progress-ring"></div> <!-- Trang trí -->
+                <div class="status-badge" id="timer-status">Sẵn sàng tập trung</div>
+                <div class="timer-display" id="timer">25:00</div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" id="start-btn" onclick="toggleTimer()">
+                        ▶ Bắt đầu
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetTimer()">
+                        ↻ Đặt lại
+                    </button>
                 </div>
-                <div class="setting-group">
-                    <label class="setting-label">Nghỉ ngắn (phút)</label>
-                    <input type="number" class="setting-input" id="shortBreak" value="5" min="1" max="30">
-                </div>
-                <div class="setting-group">
-                    <label class="setting-label">Nghỉ dài (phút)</label>
-                    <input type="number" class="setting-input" id="longBreak" value="15" min="1" max="60">
-                </div>
-                <div class="setting-group">
-                    <label class="setting-label">Chu kỳ</label>
-                    <input type="number" class="setting-input" id="cycles" value="4" min="1" max="10">
+
+                <div class="settings">
+                    <div class="input-group">
+                        <label>Làm (phút)</label>
+                        <input type="number" id="work-time" class="time-input" value="25" min="1" max="60" onchange="updateSettings()">
+                    </div>
+                    <div class="input-group">
+                        <label>Nghỉ (phút)</label>
+                        <input type="number" id="break-time" class="time-input" value="5" min="1" max="60" onchange="updateSettings()">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Clock functionality
+        // --- 1. CLOCK LOGIC ---
         function updateClock() {
             const now = new Date();
+            
+            // Giờ, phút, giây
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
-            
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-            
-            const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
-            const day = days[now.getDay()];
-            const date = String(now.getDate()).padStart(2, '0');
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const year = now.getFullYear();
-            
-            document.getElementById('date').textContent = `${day}, ${date}/${month}/${year}`;
-        }
 
+            // Ngày tháng
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('vi-VN', options);
+        }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Pomodoro functionality
-        let pomodoroInterval;
-        let timeLeft;
+        // --- 2. POMODORO LOGIC ---
+        let timerInterval;
         let isRunning = false;
-        let currentMode = 'work';
-        let cycleCount = 0;
-        const circumference = 2 * Math.PI * 90;
+        let isWorkSession = true; // true = work, false = break
+        let timeLeft = 25 * 60; // seconds
 
-        const timerDisplay = document.getElementById('timer');
-        const timerLabel = document.getElementById('timerLabel');
-        const startBtn = document.getElementById('startBtn');
-        const pauseBtn = document.getElementById('pauseBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const progress = document.getElementById('progress');
+        // Âm thanh thông báo (dùng beep mặc định của trình duyệt thông qua AudioContext)
+        function playAlarm() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            
+            const ctx = new AudioContext();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
 
-        const workTimeInput = document.getElementById('workTime');
-        const shortBreakInput = document.getElementById('shortBreak');
-        const longBreakInput = document.getElementById('longBreak');
-        const cyclesInput = document.getElementById('cycles');
+            osc.connect(gain);
+            gain.connect(ctx.destination);
 
-        function updateProgress(percent) {
-            const offset = circumference - (percent / 100) * circumference;
-            progress.style.strokeDashoffset = offset;
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, ctx.currentTime); // A5
+            osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.5);
+            
+            gain.gain.setValueAtTime(0.5, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+
+            osc.start();
+            osc.stop(ctx.currentTime + 0.5);
         }
 
         function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
         }
 
         function updateDisplay() {
-            timerDisplay.textContent = formatTime(timeLeft);
-            const totalTime = getTotalTime();
-            const percent = (timeLeft / totalTime) * 100;
-            updateProgress(percent);
+            document.getElementById('timer').textContent = formatTime(timeLeft);
+            
+            // Update title tab
+            document.title = `${formatTime(timeLeft)} - ${isWorkSession ? 'Làm việc' : 'Nghỉ ngơi'}`;
         }
 
-        function getTotalTime() {
-            if (currentMode === 'work') {
-                return parseInt(workTimeInput.value) * 60;
-            } else if (currentMode === 'shortBreak') {
-                return parseInt(shortBreakInput.value) * 60;
-            } else {
-                return parseInt(longBreakInput.value) * 60;
-            }
-        }
-
-        function startTimer() {
+        function updateStatusText() {
+            const statusEl = document.getElementById('timer-status');
             if (!isRunning) {
+                statusEl.textContent = "Tạm dừng";
+                return;
+            }
+            statusEl.textContent = isWorkSession ? "🔥 Đang tập trung" : "☕ Giờ nghỉ ngơi";
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('start-btn');
+            
+            if (isRunning) {
+                // Pause
+                clearInterval(timerInterval);
+                isRunning = false;
+                btn.textContent = "▶ Tiếp tục";
+                updateStatusText();
+            } else {
+                // Start
                 isRunning = true;
-                startBtn.textContent = 'Đang chạy';
-                timerDisplay.classList.remove('pulse');
+                btn.textContent = "❚❚ Tạm dừng";
+                updateStatusText();
                 
-                pomodoroInterval = setInterval(() => {
-                    timeLeft--;
-                    updateDisplay();
-                    
-                    if (timeLeft <= 0) {
-                        clearInterval(pomodoroInterval);
-                        isRunning = false;
-                        startBtn.textContent = 'Bắt đầu';
-                        timerDisplay.classList.add('pulse');
-                        
-                        if (currentMode === 'work') {
-                            cycleCount++;
-                            if (cycleCount >= parseInt(cyclesInput.value)) {
-                                currentMode = 'longBreak';
-                                timerLabel.textContent = 'Nghỉ dài';
-                                cycleCount = 0;
-                            } else {
-                                currentMode = 'shortBreak';
-                                timerLabel.textContent = 'Nghỉ ngắn';
-                            }
-                        } else {
-                            currentMode = 'work';
-                            timerLabel.textContent = 'Làm việc';
-                        }
-                        
-                        resetTimer();
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateDisplay();
+                    } else {
+                        // Hết giờ
+                        clearInterval(timerInterval);
+                        playAlarm();
+                        switchMode();
                     }
                 }, 1000);
             }
         }
 
-        function pauseTimer() {
-            if (isRunning) {
-                clearInterval(pomodoroInterval);
-                isRunning = false;
-                startBtn.textContent = 'Tiếp tục';
-            }
-        }
-
-        function resetTimer() {
-            clearInterval(pomodoroInterval);
+        function switchMode() {
+            isWorkSession = !isWorkSession;
+            const workInput = document.getElementById('work-time').value;
+            const breakInput = document.getElementById('break-time').value;
+            
+            timeLeft = (isWorkSession ? workInput : breakInput) * 60;
             isRunning = false;
-            startBtn.textContent = 'Bắt đầu';
-            timerDisplay.classList.remove('pulse');
             
-            if (currentMode === 'work') {
-                timeLeft = parseInt(workTimeInput.value) * 60;
-                timerLabel.textContent = 'Làm việc';
-            } else if (currentMode === 'shortBreak') {
-                timeLeft = parseInt(shortBreakInput.value) * 60;
-                timerLabel.textContent = 'Nghỉ ngắn';
-            } else {
-                timeLeft = parseInt(longBreakInput.value) * 60;
-                timerLabel.textContent = 'Nghỉ dài';
-            }
-            
+            document.getElementById('start-btn').textContent = "▶ Bắt đầu " + (isWorkSession ? "Làm" : "Nghỉ");
+            document.getElementById('timer-status').textContent = isWorkSession ? "Đến giờ làm việc!" : "Đến giờ nghỉ!";
             updateDisplay();
         }
 
-        startBtn.addEventListener('click', startTimer);
-        pauseBtn.addEventListener('click', pauseTimer);
-        resetBtn.addEventListener('click', () => {
-            currentMode = 'work';
-            cycleCount = 0;
-            resetTimer();
-        });
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            isWorkSession = true;
+            
+            const workInput = document.getElementById('work-time').value;
+            timeLeft = workInput * 60;
+            
+            document.getElementById('start-btn').textContent = "▶ Bắt đầu";
+            document.getElementById('timer-status').textContent = "Sẵn sàng tập trung";
+            updateDisplay();
+        }
 
-        [workTimeInput, shortBreakInput, longBreakInput].forEach(input => {
-            input.addEventListener('change', () => {
-                if (!isRunning) {
-                    resetTimer();
+        function updateSettings() {
+            // Chỉ cập nhật nếu timer đang dừng để tránh lỗi logic
+            if (!isRunning) {
+                const workInput = document.getElementById('work-time').value;
+                const breakInput = document.getElementById('break-time').value;
+                
+                // Nếu đang ở chế độ nào thì update thời gian theo chế độ đó
+                if (isWorkSession) {
+                    timeLeft = workInput * 60;
+                } else {
+                    timeLeft = breakInput * 60;
                 }
-            });
-        });
+                updateDisplay();
+            }
+        }
 
-        resetTimer();
+        // Init
+        updateDisplay();
     </script>
 </body>
 </html>
