@@ -120,6 +120,19 @@
             letter-spacing: 2px;
         }
 
+        .sync-info {
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            opacity: 0.8;
+        }
+
+        .sync-info.ahead { color: #4ade80; }
+        .sync-info.behind { color: #f87171; }
+        .sync-info.synced { color: #60a5fa; }
+
         @media (max-width: 768px) {
             .time-display { font-size: 4rem; }
             .date-display { font-size: 1rem; }
@@ -264,6 +277,7 @@
             <div class="clock-container">
                 <div class="time-display" id="clock">00:00:00</div>
                 <div class="date-display" id="date">Đang tải...</div>
+                <div class="sync-info" id="sync-info"></div>
             </div>
         </div>
 
@@ -322,6 +336,12 @@
                 const response = await fetch('https://sildazgfdvffqgqetwmv.supabase.co/functions/v1/time-function');
                 const data = await response.json();
                 const apiTime = new Date(data.time.iso);
+                const localTime = new Date();
+                
+                // Tính chênh lệch giữa máy local và server (ms)
+                // Dương = máy nhanh hơn, Âm = máy chậm hơn
+                const localDiff = localTime.getTime() - apiTime.getTime();
+                updateSyncInfo(localDiff);
                 
                 // So sánh và sửa nếu chênh lệch > 1 giây
                 const diff = Math.abs(serverTime.getTime() - apiTime.getTime());
@@ -331,6 +351,36 @@
                 }
             } catch (error) {
                 console.error('Lỗi khi đồng bộ thời gian:', error);
+            }
+        }
+
+        function updateSyncInfo(diffMs) {
+            const syncEl = document.getElementById('sync-info');
+            const absDiff = Math.abs(diffMs);
+            
+            // Format thời gian chênh lệch
+            let diffText;
+            if (absDiff < 1000) {
+                diffText = 'Đồng bộ';
+                syncEl.className = 'sync-info synced';
+            } else if (absDiff < 60000) {
+                diffText = `${(absDiff / 1000).toFixed(1)} giây`;
+            } else if (absDiff < 3600000) {
+                diffText = `${Math.floor(absDiff / 60000)} phút ${Math.floor((absDiff % 60000) / 1000)} giây`;
+            } else {
+                diffText = `${Math.floor(absDiff / 3600000)} giờ ${Math.floor((absDiff % 3600000) / 60000)} phút`;
+            }
+            
+            if (absDiff >= 1000) {
+                if (diffMs > 0) {
+                    syncEl.textContent = `⏱ Máy bạn nhanh ${diffText}`;
+                    syncEl.className = 'sync-info ahead';
+                } else {
+                    syncEl.textContent = `⏱ Máy bạn chậm ${diffText}`;
+                    syncEl.className = 'sync-info behind';
+                }
+            } else {
+                syncEl.textContent = `⏱ ${diffText}`;
             }
         }
 
