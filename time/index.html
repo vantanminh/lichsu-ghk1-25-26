@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .clock-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clock-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .clock-display {
+            color: white;
+            font-size: 72px;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            letter-spacing: 5px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .date-display {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: 300;
+        }
+
+        .pomodoro-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pomodoro-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .timer-display {
+            color: white;
+            font-size: 64px;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            margin: 20px 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .settings {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .setting-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .setting-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .setting-input {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px;
+            border-radius: 15px;
+            width: 80px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .setting-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-ring {
+            width: 200px;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.3s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .clock-display {
+                font-size: 56px;
+            }
+
+            .timer-display {
+                font-size: 48px;
+            }
+
+            .card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .clock-display {
+                font-size: 42px;
+            }
+
+            .timer-display {
+                font-size: 36px;
+            }
+
+            .clock-title, .pomodoro-title {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .settings {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .pulse {
+            animation: pulse 1s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card clock-card">
+            <h2 class="clock-title">THỜI GIAN HIỆN TẠI</h2>
+            <div class="clock-display" id="clock">00:00:00</div>
+            <div class="date-display" id="date">Loading...</div>
+        </div>
+
+        <div class="card pomodoro-card">
+            <h2 class="pomodoro-title">POMODORO TIMER</h2>
+            
+            <svg class="progress-ring">
+                <circle
+                    class="progress-ring-circle"
+                    stroke="rgba(255, 255, 255, 0.2)"
+                    stroke-width="8"
+                    fill="transparent"
+                    r="90"
+                    cx="100"
+                    cy="100"/>
+                <circle
+                    id="progress"
+                    class="progress-ring-circle"
+                    stroke="white"
+                    stroke-width="8"
+                    fill="transparent"
+                    r="90"
+                    cx="100"
+                    cy="100"
+                    stroke-dasharray="565.48"
+                    stroke-dashoffset="0"/>
+            </svg>
+
+            <div class="timer-display" id="timer">25:00</div>
+            <div class="timer-label" id="timerLabel">Làm việc</div>
+
+            <div class="controls">
+                <button class="btn btn-primary" id="startBtn">Bắt đầu</button>
+                <button class="btn" id="pauseBtn">Tạm dừng</button>
+                <button class="btn" id="resetBtn">Đặt lại</button>
+            </div>
+
+            <div class="settings">
+                <div class="setting-group">
+                    <label class="setting-label">Làm việc (phút)</label>
+                    <input type="number" class="setting-input" id="workTime" value="25" min="1" max="60">
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label">Nghỉ ngắn (phút)</label>
+                    <input type="number" class="setting-input" id="shortBreak" value="5" min="1" max="30">
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label">Nghỉ dài (phút)</label>
+                    <input type="number" class="setting-input" id="longBreak" value="15" min="1" max="60">
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label">Chu kỳ</label>
+                    <input type="number" class="setting-input" id="cycles" value="4" min="1" max="10">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Clock functionality
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+            const day = days[now.getDay()];
+            const date = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            
+            document.getElementById('date').textContent = `${day}, ${date}/${month}/${year}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Pomodoro functionality
+        let pomodoroInterval;
+        let timeLeft;
+        let isRunning = false;
+        let currentMode = 'work';
+        let cycleCount = 0;
+        const circumference = 2 * Math.PI * 90;
+
+        const timerDisplay = document.getElementById('timer');
+        const timerLabel = document.getElementById('timerLabel');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const progress = document.getElementById('progress');
+
+        const workTimeInput = document.getElementById('workTime');
+        const shortBreakInput = document.getElementById('shortBreak');
+        const longBreakInput = document.getElementById('longBreak');
+        const cyclesInput = document.getElementById('cycles');
+
+        function updateProgress(percent) {
+            const offset = circumference - (percent / 100) * circumference;
+            progress.style.strokeDashoffset = offset;
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function updateDisplay() {
+            timerDisplay.textContent = formatTime(timeLeft);
+            const totalTime = getTotalTime();
+            const percent = (timeLeft / totalTime) * 100;
+            updateProgress(percent);
+        }
+
+        function getTotalTime() {
+            if (currentMode === 'work') {
+                return parseInt(workTimeInput.value) * 60;
+            } else if (currentMode === 'shortBreak') {
+                return parseInt(shortBreakInput.value) * 60;
+            } else {
+                return parseInt(longBreakInput.value) * 60;
+            }
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                startBtn.textContent = 'Đang chạy';
+                timerDisplay.classList.remove('pulse');
+                
+                pomodoroInterval = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(pomodoroInterval);
+                        isRunning = false;
+                        startBtn.textContent = 'Bắt đầu';
+                        timerDisplay.classList.add('pulse');
+                        
+                        if (currentMode === 'work') {
+                            cycleCount++;
+                            if (cycleCount >= parseInt(cyclesInput.value)) {
+                                currentMode = 'longBreak';
+                                timerLabel.textContent = 'Nghỉ dài';
+                                cycleCount = 0;
+                            } else {
+                                currentMode = 'shortBreak';
+                                timerLabel.textContent = 'Nghỉ ngắn';
+                            }
+                        } else {
+                            currentMode = 'work';
+                            timerLabel.textContent = 'Làm việc';
+                        }
+                        
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            if (isRunning) {
+                clearInterval(pomodoroInterval);
+                isRunning = false;
+                startBtn.textContent = 'Tiếp tục';
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(pomodoroInterval);
+            isRunning = false;
+            startBtn.textContent = 'Bắt đầu';
+            timerDisplay.classList.remove('pulse');
+            
+            if (currentMode === 'work') {
+                timeLeft = parseInt(workTimeInput.value) * 60;
+                timerLabel.textContent = 'Làm việc';
+            } else if (currentMode === 'shortBreak') {
+                timeLeft = parseInt(shortBreakInput.value) * 60;
+                timerLabel.textContent = 'Nghỉ ngắn';
+            } else {
+                timeLeft = parseInt(longBreakInput.value) * 60;
+                timerLabel.textContent = 'Nghỉ dài';
+            }
+            
+            updateDisplay();
+        }
+
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', () => {
+            currentMode = 'work';
+            cycleCount = 0;
+            resetTimer();
+        });
+
+        [workTimeInput, shortBreakInput, longBreakInput].forEach(input => {
+            input.addEventListener('change', () => {
+                if (!isRunning) {
+                    resetTimer();
+                }
+            });
+        });
+
+        resetTimer();
+    </script>
+</body>
+</html>
