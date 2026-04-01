@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài liệu Thuyết trình: Khởi nghĩa Tây Sơn</title>
+    <style>
+        /* CSS Reset & Biến màu sắc */
+        :root {
+            --primary-color: #b71c1c; /* Đỏ đô lịch sử */
+            --secondary-color: #1565c0; /* Xanh dương đậm */
+            --bg-color: #f4f6f8; /* Xám nhạt nền */
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #555555;
+            --story-bg: #e3f2fd; /* Xanh nhạt cho phần kể chuyện */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 16px;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #b71c1c, #d32f2f);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(183, 28, 28, 0.3);
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .intro-text {
+            font-style: italic;
+            color: var(--text-muted);
+            text-align: justify;
+            margin-bottom: 20px;
+            padding: 0 10px;
+            font-size: 0.95rem;
+        }
+
+        /* Các phần/Card */
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        /* Card đặc biệt cho phần Kể chuyện */
+        .story-card {
+            background-color: var(--story-bg);
+            border-top: 4px solid #0277bd;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            border-bottom: 2px solid #eeeeee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .story-title {
+            color: #0277bd;
+            border-bottom: 2px solid #bbdefb;
+        }
+
+        .sub-section {
+            margin-bottom: 20px;
+        }
+
+        .sub-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sub-title {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .sub-title::before {
+            content: "✦";
+            color: #f39c12;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .story-subtitle::before {
+            content: "🔥";
+            color: transparent;
+            text-shadow: 0 0 0 #e65100;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+
+        .story-card li::before {
+            color: #0277bd;
+        }
+
+        strong {
+            color: #222;
+        }
+
+        .highlight-red {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .presenter-note {
+            background-color: #fffde7;
+            border-left: 4px solid #fbc02d;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .note-title {
+            font-weight: bold;
+            color: #f57f17;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>TÀI LIỆU ÔN TẬP & THUYẾT TRÌNH</h1>
+        <p>PHONG TRÀO TÂY SƠN: Đỉnh cao quân sự và Di sản quản trị (1773 - 1802)</p>
+    </header>
+
+    <div class="intro-text">
+        Lời dẫn chuyển ý: Sau khi thiết lập căn cứ và làm chủ vùng Quy Nhơn - Quảng Ngãi vào năm 1773, phong trào Tây Sơn đã vượt ra khỏi khuôn khổ một cuộc nổi dậy địa phương, bước vào giai đoạn quyết định với những chiến dịch quân sự thay đổi hoàn toàn cục diện đất nước.
+    </div>
+
+    <!-- PHẦN 1 -->
+    <div class="section-card">
+        <h2 class="section-title">Phần 1: Các chiến dịch và sự thống nhất</h2>
+        
+        <div class="sub-section">
+            <h3 class="sub-title">1. Mở rộng và Nam tiến (1773 – 1786)</h3>
+            <ul>
+                <li><strong>Chiến lược:</strong> Tạm hòa hoãn với quân Trịnh ở phía Bắc để đánh chúa Nguyễn ở phía Nam.</li>
+                <li><strong>Diễn biến:</strong> 5 đợt tiến công lớn vào Gia Định, đánh tan lực lượng chúa Nguyễn, Nguyễn Ánh bỏ chạy lưu vong.</li>
+                <li><strong>Động lực xã hội:</strong> Đập tan bộ máy tham nhũng, đốt sổ thuế, xé văn tự nợ, lấy của người giàu chia cho dân nghèo.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title">2. Rạch Gầm – Xoài Mút (1785)</h3>
+            <ul>
+                <li><strong>Bối cảnh:</strong> Nguyễn Ánh cầu viện vua Xiêm. Xiêm đưa 5 vạn quân, 300 chiến thuyền sang.</li>
+                <li><strong>Trận chiến:</strong> Đêm 19 rạng 20/01/1785, dụ liên quân Xiêm - Nguyễn lọt vào trận địa mai phục dài 7km trên sông Tiền.</li>
+                <li><strong>Kết quả:</strong> Đập tan quân Xiêm, chặn đứng âm mưu bành trướng xuống Nam Bộ.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title">3. Bắc tiến lật đổ họ Trịnh (1786)</h3>
+            <ul>
+                <li><strong>Tốc chiến:</strong> Tháng 6/1786, tiến ra Bắc, chỉ 10 ngày đánh tan 3 vạn quân Trịnh ở Phú Xuân.</li>
+                <li><strong>Vào Thăng Long:</strong> Ngày 21/7/1786, lật đổ chính quyền chúa Trịnh tồn tại gần 300 năm, tạo tiền đề thống nhất.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title">4. Ngọc Hồi – Đống Đa (1788 – 1789)</h3>
+            <ul>
+                <li><strong>Bối cảnh:</strong> Lê Chiêu Thống cầu viện, 29 vạn quân Thanh do Tôn Sĩ Nghị tràn sang.</li>
+                <li><strong>Chiến dịch Kỷ Dậu:</strong> Hành quân thần tốc, chia 5 đạo quân, tận dụng dịp Tết đánh tan các cứ điểm Hà Hồi, Ngọc Hồi, Đống Đa.</li>
+                <li><strong>Kết quả:</strong> Quét sạch quân Thanh, bảo vệ độc lập.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title">5. Suy thoái và Sụp đổ (1792 – 1802)</h3>
+            <ul>
+                <li><strong>Biến cố:</strong> 1792, Quang Trung qua đời, nội bộ khủng hoảng do thiếu cơ chế kế nhiệm.</li>
+                <li><strong>Bước ngoặt Thị Nại (1801):</strong> Nguyễn Ánh dùng 1.000 chiến hạm hỏa công đánh úp. Tây Sơn mất 1.800 thuyền.</li>
+                <li><strong>Kết thúc:</strong> 1802, triều Tây Sơn sụp đổ, nhà Nguyễn thành lập.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PHẦN THÊM MỚI: GÓC KỂ CHUYỆN -->
+    <div class="section-card story-card">
+        <h2 class="section-title story-title">Góc Kể Chuyện: Những giai thoại thú vị</h2>
+        <p style="margin-bottom: 15px; font-style: italic; color: #555;">(Dùng để kể đan xen giúp bài thuyết trình hấp dẫn, gây ấn tượng mạnh với người nghe)</p>
+        
+        <div class="sub-section">
+            <h3 class="sub-title story-subtitle">1. Sự tích "Hành quân bằng võng"</h3>
+            <ul>
+                <li>Để di chuyển thần tốc từ Phú Xuân ra Thăng Long đánh quân Thanh, Quang Trung đã sáng tạo ra một phương pháp chưa từng có: <strong>Cứ 3 người làm thành 1 tổ, 2 người cáng 1 người ngủ trên võng</strong>, luân phiên nhau đi suốt ngày đêm không nghỉ.</li>
+                <li>Nhờ vậy, một đạo quân khổng lồ đi bộ nhưng tốc độ ngang ngửa kỵ binh, khiến quân Thanh không kịp trở tay.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title story-subtitle">2. "Xe tăng" voi chiến & Áo giáp rơm</h3>
+            <ul>
+                <li>Trong trận Ngọc Hồi, quân Thanh dùng hỏa khí rất mạnh. Quân Tây Sơn đã lấy <strong>rơm tẩm nước cho ướt sũng, bện thành những tấm mộc (lá chắn) khổng lồ</strong>. Hàng chục người khiêng một tấm đi trước cản đạn lửa, quân chủ lực tiến theo sau an toàn.</li>
+                <li>Kết hợp với đó là đàn voi chiến hơn 100 con (được ví như "xe tăng" thời bấy giờ) xông thẳng vào trận địa, khiến kỵ binh quân Thanh sợ hãi hất ngã lính mà bỏ chạy.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title story-subtitle">3. Đỉnh cao ngoại giao: Phái đoàn "Giả Vương"</h3>
+            <ul>
+                <li>Sau khi đánh tan 29 vạn quân Thanh, để tránh bị nhà Thanh trả thù và khôi phục giao thương, Quang Trung đã xin cử phái đoàn sang chúc thọ 80 tuổi của vua Càn Long.</li>
+                <li>Điều thú vị là Quang Trung <strong>không đi thật mà cử một người có dung mạo giống mình là Phạm Công Trị đi thay (Giả Vương)</strong>. Vua Càn Long không hề hay biết, lại vô cùng hãnh diện, sủng ái ôm "vua giả" vào lòng và ban thưởng vô số của cải. Một màn kịch ngoại giao hoàn hảo giữ thể diện cho nước lớn nhưng vẫn bảo toàn lực lượng cho nước nhỏ.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title story-subtitle">4. Tam cố thảo lư phiên bản Việt</h3>
+            <ul>
+                <li>Quang Trung là người rất trọng người tài. Để mời danh sĩ Nguyễn Thiếp (La Sơn Phu Tử) ra giúp nước, ông đã <strong>3 lần đích thân viết thư tay</strong>. </li>
+                <li>Dù ban đầu Nguyễn Thiếp từ chối vì mang nặng tư tưởng trung thần với nhà Lê, nhưng sự chân thành, khiêm tốn của vị hoàng đế bách chiến bách thắng đã khiến ông cảm động, quyết định xuống núi trở thành cố vấn giáo dục hàng đầu của triều Tây Sơn.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PHẦN 2 -->
+    <div class="section-card">
+        <h2 class="section-title">Phần 2: Nghệ thuật quân sự & Trang bị</h2>
+        <p style="margin-bottom: 15px; text-align: justify;">Kết hợp hài hòa <span class="highlight-red">"Lực – Thế – Thời – Mưu"</span> và phương châm <strong>"Đánh nhanh, thắng nhanh"</strong>.</p>
+        
+        <div class="sub-section">
+            <h3 class="sub-title">1. Chọn chiến trường & Gài thế</h3>
+            <ul>
+                <li><strong>Rạch Gầm - Xoài Mút:</strong> Không đánh đại bản doanh. Dụ địch vào sông hẹp, lợi dụng thủy triều. Dùng pháo binh hai bờ bắn chéo, tạo thế "khóa đầu - khóa đuôi".</li>
+                <li><strong>Ngọc Hồi - Đống Đa:</strong> Chọn lúc địch nghỉ Tết. Đánh thẳng cứ điểm chính, vu hồi điểm sơ hở. Giăng lưới truy kích tại Đầm Mực.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title">2. Trang bị & Binh chủng</h3>
+            <ul>
+                <li><strong>Vũ khí:</strong> Kết hợp vũ khí lạnh (kiếm, giáo) và hỏa khí (hỏa hổ, đại bác).</li>
+                <li><strong>Hải quân:</strong> Thủy quân cực mạnh, đỉnh cao là siêu chiến hạm "Định Quốc" (>60 hải pháo/chiếc).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PHẦN 3 -->
+    <div class="section-card">
+        <h2 class="section-title">Phần 3: Đối ngoại & Quản trị quốc gia</h2>
+        
+        <div class="sub-section">
+            <h3 class="sub-title">1. Ngoại giao thực dụng</h3>
+            <ul>
+                <li><strong>Tiền chiến:</strong> Dùng sứ giả điều đình làm địch chủ quan, khoét sâu mâu thuẫn nội bộ.</li>
+                <li><strong>Hậu chiến:</strong> "Mềm dẻo nhưng kiên quyết". Giữ nghi lễ triều cống để giữ thể diện cho nhà Thanh, tranh thủ hòa bình để tái thiết.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title">2. Quản trị & Tái thiết (Thời Quang Trung)</h3>
+            <ul>
+                <li><strong>Khuyến nông:</strong> Ban hành Chiếu Khuyến nông phục hồi kinh tế nhanh chóng.</li>
+                <li><strong>Giáo dục & Ngôn ngữ:</strong> Tôn vinh chữ Nôm, dịch sách chữ Hán sang chữ Nôm để phổ cập giáo dục.</li>
+                <li><strong>Nhân sự:</strong> Chiêu hiền đãi sĩ, trọng dụng nhân tài bất kể xuất thân.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PHẦN 4 -->
+    <div class="section-card">
+        <h2 class="section-title">Phần 4: Ý nghĩa & Bài học đúc kết</h2>
+        
+        <div class="sub-section">
+            <h3 class="sub-title">1. Đóng góp vĩ đại</h3>
+            <ul>
+                <li>Bảo vệ toàn vẹn lãnh thổ, đập tan hai cuộc ngoại xâm (Xiêm, Thanh).</li>
+                <li>Chấm dứt 3 thế kỷ chia cắt Đàng Trong - Đàng Ngoài, đặt nền móng quốc gia thống nhất.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3 class="sub-title">2. Bốn bài học Lãnh đạo - Quản trị</h3>
+            <ul>
+                <li><strong>Tạo liên minh & Truyền thông:</strong> Bắt đúng "mạch bất bình" của xã hội. Thông điệp "Lấy của người giàu chia cho người nghèo" thu hút mọi tầng lớp.</li>
+                <li><strong>Chớp thời cơ:</strong> Không đánh vào thế mạnh đối thủ. Dùng mưu, chọn đúng điểm rơi (thời gian, địa hình) có lợi nhất.</li>
+                <li><strong>Thể chế hóa:</strong> Thắng lợi quân sự phải đi kèm ngay với chính sách (khuyến nông, giáo dục) để củng cố nền tảng bền vững.</li>
+                <li><strong>Kiểm soát rủi ro & Kế nhiệm:</strong> Điểm yếu chí mạng là phụ thuộc 1 cá nhân xuất chúng (Quang Trung). Thiếu cơ chế kế nhiệm khiến hệ thống sụp đổ nhanh chóng.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Note cho người thuyết trình -->
+    <div class="presenter-note">
+        <span class="note-title">💡 Mẹo khi đứng thuyết trình:</span>
+        <p>- Ở phần <b>Góc kể chuyện</b>, hãy thay đổi giọng điệu: lúc hào hùng (kể về voi chiến), lúc hóm hỉnh (kể chuyện "Giả Vương" lừa vua Càn Long) để thu hút ánh nhìn của khán giả.</p>
+        <p>- Ở <b>Phần 4 (Bài học)</b>, hãy nhìn thẳng vào mắt người nghe, nói chậm lại và liên hệ thực tế (ví dụ: quản trị doanh nghiệp cũng cần truyền thông đúng thông điệp, cũng cần đào tạo người kế nhiệm) để bài thuyết trình có chiều sâu hơn.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
