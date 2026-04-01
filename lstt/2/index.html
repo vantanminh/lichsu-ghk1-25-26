@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biên niên sử: Khởi nghĩa Tây Sơn (1771–1802)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #9b1c1c; /* Đỏ đô */
+            --secondary-color: #b45309; /* Vàng đồng đậm */
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --timeline-line: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #7f1d1d, #9b1c1c);
+            color: white;
+            padding: 50px 20px 80px;
+            text-align: center;
+            border-bottom: 6px solid var(--secondary-color);
+        }
+
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        header p { font-size: 1.1rem; opacity: 0.9; }
+
+        /* Container & Timeline Structure */
+        .container {
+            max-width: 900px;
+            margin: -40px auto 40px;
+            padding: 0 15px;
+            position: relative;
+        }
+
+        /* Dòng kẻ dọc của timeline */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            bottom: 0;
+            left: 35px; /* Vị trí đường kẻ */
+            width: 4px;
+            background: var(--timeline-line);
+            border-radius: 4px;
+            z-index: 0;
+        }
+
+        /* Bố cục thẻ cho mỗi giai đoạn */
+        .timeline-card {
+            background: var(--surface-color);
+            border-radius: 12px;
+            padding: 24px 24px 24px 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            margin-left: 20px; /* Nhường chỗ cho đường kẻ dọc */
+        }
+
+        /* Điểm nút trên đường timeline */
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -23px; /* Đặt viên bi lên đường kẻ */
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border: 4px solid var(--bg-color);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        /* Typography */
+        .year-badge {
+            background: var(--secondary-color);
+            color: white;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            left: -10px;
+        }
+
+        h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 14px; text-align: justify; }
+        ul { margin-bottom: 16px; padding-left: 24px; }
+        li { margin-bottom: 8px; }
+
+        /* Tables */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) { background-color: #f8fafc; }
+
+        /* Mermaid Charts Container */
+        .mermaid-container {
+            width: 100%;
+            overflow-x: auto;
+            background: #fff;
+            padding: 15px 0;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background-color: #fef2f2;
+            border-left: 4px solid var(--primary-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        /* Intro Card (No timeline dot) */
+        .intro-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            .container::before { left: 20px; }
+            .timeline-card { padding: 20px 16px 20px 24px; margin-left: 5px; }
+            .timeline-card::before { left: -19px; width: 16px; height: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Biên niên sử: Cuộc Khởi nghĩa Tây Sơn<br>(1771–1802)</h1>
+        <p>Tiến trình lịch sử, chiến lược và nghệ thuật quân sự</p>
+    </header>
+
+    <div class="container">
+
+        <!-- OVERVIEW GANTT CHART -->
+        <div class="intro-card">
+            <h2>Tổng quan Tiến trình</h2>
+            <p>Cuộc khởi nghĩa Tây Sơn do ba anh em <strong>Nguyễn Nhạc, Nguyễn Huệ, Nguyễn Lữ</strong> lãnh đạo đã trải qua 5 chặng đường lớn, từ một cuộc nổi dậy địa phương trở thành biến cố quân sự quy mô khu vực, thống nhất đất nước và đánh bại hai cuộc can thiệp ngoại bang.</p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    gantt
+                    title Trục thời gian tổng thể (1771 - 1802)
+                    dateFormat  YYYY-MM-DD
+                    axisFormat  %Y
+                    
+                    Khởi phát & Hạ Quy Nhơn :1771-01-01, 1774-01-01
+                    Nam tiến & Lật đổ chúa Nguyễn :1774-01-01, 1785-01-01
+                    Chống Xiêm (Rạch Gầm-Xoài Mút) :milestone, 1785-01-20, 0d
+                    Bắc tiến & Lật đổ chúa Trịnh :1786-06-01, 1786-12-31
+                    Chống Thanh (Ngọc Hồi-Đống Đa) :milestone, 1789-02-05, 0d
+                    Củng cố, suy thoái & Sụp đổ :1789-02-05, 1802-06-01
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMELINE BẮT ĐẦU -->
+
+        <!-- PRE-1771 -->
+        <div class="timeline-card">
+            <div class="year-badge">Trước 1771</div>
+            <h2>Bối cảnh, Khủng hoảng & Tiền đề</h2>
+            
+            <p>Đại Việt chìm trong di sản chia cắt Trịnh – Nguyễn. Nửa sau thế kỷ XVIII, cả hai Đàng đều rơi vào suy thoái thể chế tột độ, tạo ra "chân không quyền lực".</p>
+            
+            <h3>1. Khủng hoảng Chính trị & Kinh tế</h3>
+            <ul>
+                <li><strong>Tham nhũng:</strong> Ở Đàng Trong, quyền lực rơi vào tay quyền thần Trương Phúc Loan. Nạn mua quan bán tước công khai (năm 1725: nộp 50 quan được làm tướng thần).</li>
+                <li><strong>Bóc lột:</strong> Sưu thuế nặng nề, nông dân rơi vào cảnh nợ nần, mất đất.</li>
+            </ul>
+
+            <h3>2. Lợi thế Địa kinh tế vùng biên</h3>
+            <p>Vùng duyên hải miền Trung sở hữu các thương cảng sầm uất như Hội An, <strong>Thị Nại – Nước Mặn</strong> (Bình Định). Các cảng này kết nối bằng đường sông (sông Côn) lên các "nguồn" hàng ở cao nguyên (như An Khê). Đây chính là mạng lưới lưu thông người, vũ khí và hậu cần hoàn hảo cho một cuộc nổi dậy.</p>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    flowchart LR
+                    subgraph Khung_Hoang_Quyen_Luc["Cấu trúc quyền lực Đàng Trong"]
+                        Nguyen[Chúa Nguyễn] --- Truong[Trương Phúc Loan tha thúng]
+                        Truong -.Bóc lột / Tham nhũng.-> Dan[Nông dân bất bình]
+                    end
+                    subgraph Dia_Kinh_Te["Mạng lưới Hậu cần Tây Sơn"]
+                        TayNguyen[Cao nguyên An Khê / Nguồn] <--> SongCon[Sông Côn]
+                        SongCon <--> Cang[Cảng Thị Nại / Nước Mặn]
+                    end
+                </div>
+            </div>
+        </div>
+
+        <!-- 1771 - 1773 -->
+        <div class="timeline-card">
+            <div class="year-badge">1771 – 1773</div>
+            <h2>Khởi phát & Tập hợp Lực lượng</h2>
+            
+            <p>Tại vùng Tây Sơn thượng đạo (An Khê, Gia Lai ngày nay) – nơi giao thoa giữa đồng bằng và miền núi, ba anh em Tây Sơn dựng cờ khởi nghĩa.</p>
+
+            <h3>Chiến lược Chính trị & Xã hội</h3>
+            <div class="highlight-box">
+                <h4>Khẩu hiệu trúng đích:</h4>
+                <p><strong>1. "Đánh đổ quyền thần Trương Phúc Loan, ủng hộ Hoàng tôn Nguyễn Phúc Dương":</strong> Giúp phò chính trừ gian, cô lập kẻ thù, lôi kéo quan lại bất bình.</p>
+                <p><strong>2. "Lấy của nhà giàu chia cho người nghèo":</strong> Hành động đốt sổ thuế, xé văn tự vay nợ, chia lúa gạo đã huy động lập tức sức mạnh của nông dân nghèo.</p>
+            </div>
+
+            <p><strong>Xây dựng liên minh đa tầng:</strong> Nguyễn Nhạc vốn là người đi buôn trầu, am hiểu địa bàn. Nghĩa quân không chỉ có nông dân mà thu hút cả <em>thổ hào, thương nhân Hoa kiều (Lý Tài, Tập Đình), đồng bào Ba Na, và cư dân Chăm</em>. Sự đa dạng này mang lại nhân lực, kỹ năng tác chiến và tài chính.</p>
+            
+            <p><strong>Kết quả:</strong> Tràn xuống Hạ đạo, hạ thành Quy Nhơn (1773), kiểm soát từ Quảng Ngãi đến Bình Thuận, tạo bàn đạp tiến công chiến lược.</p>
+        </div>
+
+        <!-- 1773 - 1785 -->
+        <div class="timeline-card">
+            <div class="year-badge">1773 – 1785</div>
+            <h2>Nam tiến & Đại phá liên quân Xiêm (Rạch Gầm - Xoài Mút)</h2>
+            
+            <p>Tây Sơn tạm hòa hoãn với quân Trịnh ở phía Bắc để dồn lực đánh chúa Nguyễn ở phía Nam (Gia Định). Sau nhiều đợt tấn công (1776, 1777, 1782...), quân Nguyễn tan rã. Trong bước đường cùng, Nguyễn Ánh cầu viện vua Xiêm (Rama I).</p>
+
+            <h3>Trận quyết chiến chiến lược: Rạch Gầm – Xoài Mút (Tháng 1/1785)</h3>
+            <p>Xiêm đưa 5 vạn quân (3 vạn bộ, 2 vạn thủy) và 300 chiến thuyền sang can thiệp. Thay vì đánh thẳng vào đại bản doanh địch ở Trà Tân, Nguyễn Huệ áp dụng nghệ thuật "nhử mồi, chọn chiến trường".</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nghệ thuật Tác chiến Tây Sơn</th>
+                            <th>Mục đích / Hiệu quả</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Chọn địa hình & Thủy triều</strong></td>
+                            <td>Chọn đoạn sông Rạch Gầm - Xoài Mút (dài ~7km) có cù lao ở giữa, lợi dụng thủy triều rút để thuyền địch mắc kẹt.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ngoại giao / Địch vận</strong></td>
+                            <td>Giả vờ cử sứ giả xin thần phục để làm tướng Xiêm chủ quan, lơi lỏng phòng bị.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Khóa đầu - Khóa đuôi</strong></td>
+                            <td>Phục kích chặn đường tiến và đường lùi, dồn 300 chiến thuyền Xiêm vào tử địa.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pháo binh kết hợp</strong></td>
+                            <td>Đặt đại bác trên bờ và trên các cù lao, bắn chéo góc tiêu diệt hạm đội địch.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    flowchart LR
+                    A[Trà Tân - Địch xuất phát] --> B[Rạch Gầm]
+                    B --> C[Đoạn phục kích ~7km]
+                    C --> D[Xoài Mút]
+                    D --> E[Mỹ Tho]
+                    P1[Pháo binh Tây Sơn trên bờ/cù lao] -.Hỏa lực chéo.- C
+                    P2[Thủy binh chặn đầu] -.Khóa.- B
+                    P3[Thủy binh khóa đuôi] -.Khóa.- D
+                </div>
+            </div>
+            <p><em>Kết quả:</em> Đánh tan 5 vạn quân Xiêm trong chưa đầy một ngày. Đập tan mưu đồ bành trướng của Xiêm xuống Nam Bộ.</p>
+        </div>
+
+        <!-- 1786 -->
+        <div class="timeline-card">
+            <div class="year-badge">1786</div>
+            <h2>Bắc tiến & Xóa bỏ Cát cứ Trịnh - Nguyễn</h2>
+            
+            <p>Sau khi dẹp yên phía Nam, tháng 6/1786, Nguyễn Huệ chỉ huy quân Tây Sơn chuyển hướng ra Bắc.</p>
+            <ul>
+                <li><strong>Thần tốc hạ Phú Xuân:</strong> Chỉ trong 10 ngày, đánh tan 3 vạn quân Trịnh chốt giữ ở Phú Xuân (Huế).</li>
+                <li><strong>Hải quân đột kích:</strong> Dùng hơn 1.000 chiến thuyền tiến thẳng ra Bắc, đánh chiếm Nam Định.</li>
+                <li><strong>Vào Thăng Long (21/7/1786):</strong> Chính thức lật đổ ách cai trị gần 300 năm của tập đoàn chúa Trịnh ở Đàng Ngoài. Hoàn thành sứ mệnh xóa bỏ ranh giới chia cắt Đàng Trong - Đàng Ngoài.</li>
+            </ul>
+        </div>
+
+        <!-- 1788 - 1789 -->
+        <div class="timeline-card">
+            <div class="year-badge">1788 – 1789</div>
+            <h2>Chống quân Thanh & Đỉnh cao Ngọc Hồi – Đống Đa</h2>
+            
+            <p>Vua Lê Chiêu Thống bỏ chạy sang nhà Thanh cầu viện. Năm 1788, Tổng đốc Tôn Sĩ Nghị dẫn đại quân (thường ghi nhận 29 vạn) tràn vào Đại Việt, lập phòng tuyến đồn lũy dài gần 90km ở phía Nam Thăng Long.</p>
+
+            <h3>Nghệ thuật Chiến dịch Kỷ Dậu (1789)</h3>
+            <p>Nguyễn Huệ lên ngôi Hoàng đế (Quang Trung), hành quân thần tốc từ Phú Xuân ra Bắc, tuyển quân tại Nghệ An, hội quân tại Tam Điệp (Thanh Hóa) và quyết định <em>đánh nhanh, thắng nhanh vào đúng dịp Tết Nguyên Đán</em> khi giặc đang chủ quan.</p>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    flowchart TB
+                    D[Căn cứ Tam Điệp / Biện Sơn]
+                    D --> |Đạo chủ lực| I[Ngọc Hồi - Đánh vỗ mặt đồn kiên cố nhất]
+                    D --> |Đạo vu hồi| K[Khương Thượng / Đống Đa - Đánh bọc sườn]
+                    D --> |Đạo vu hồi| L[Hải Dương - Đường biển]
+                    D --> |Đạo chặn lùi| M[Lục Đầu / Bắc Giang - Chặn tàn quân Thanh rút chạy]
+                    
+                    I --> J[Thăng Long]
+                    K --> J
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Chiến thuật & Khí tài đột phá:</h4>
+                <ul>
+                    <li><strong>Địch vận (Hà Hồi):</strong> Bao vây nửa đêm, dùng loa/chiêng trống gọi hàng uy hiếp tinh thần, lấy đồn không tốn một mũi tên.</li>
+                    <li><strong>Binh chủng hiệp đồng (Ngọc Hồi):</strong> Tung hơn <strong>100 voi chiến</strong> làm mũi nhọn đột phá đội hình kỵ binh Thanh.</li>
+                    <li><strong>Đội cảm tử:</strong> Tổ chức 600 lính cảm tử dùng lá chắn bện bằng rơm tẩm nước ướt (chống hỏa khí, súng tay) để áp sát và phá chiến lũy đồn Ngọc Hồi.</li>
+                    <li><strong>Trận địa mai phục truy kích:</strong> Bố trí sẵn tại Đầm Mực, sông Tô Lịch để tiêu diệt tàn quân tháo chạy.</li>
+                </ul>
+            </div>
+            <p><em>Kết quả:</em> Quét sạch quân Thanh, bảo vệ nền độc lập. Nghệ thuật ngoại giao khôn khéo sau chiến tranh giúp bình thường hóa quan hệ với nhà Thanh, giữ thể diện cho đại quốc để tránh họa binh đao lâu dài.</p>
+        </div>
+
+        <!-- 1789 - 1802 -->
+        <div class="timeline-card">
+            <div class="year-badge">1789 – 1802</div>
+            <h2>Tái thiết, Khủng hoảng & Sụp đổ</h2>
+            
+            <p>Sau chiến thắng 1789, triều Tây Sơn bước vào giai đoạn tái thiết quản trị nhưng sớm đối mặt với bi kịch nội bộ và sự phản công của Nguyễn Ánh.</p>
+
+            <h3>1. Cố gắng Thể chế hóa (Dưới thời Quang Trung)</h3>
+            <p>Các văn bản hành chính lưu trữ cho thấy Quang Trung chú trọng xây dựng nhà nước:</p>
+            <ul>
+                <li><strong>Phục hồi kinh tế:</strong> Ban hành "Chiếu Khuyến nông" (1790) buộc dân lưu tán về quê sản xuất.</li>
+                <li><strong>Giáo dục & Bản sắc:</strong> Khuyến khích dùng chữ Nôm, lập Viện Sùng Chính, dịch Tứ Thư, Kinh Thi, Kinh Dịch để đào tạo quan lại.</li>
+                <li><strong>Trọng dụng nhân tài:</strong> Gửi thư mời các học giả Bắc Hà (như Nguyễn Thiếp) ra giúp nước.</li>
+            </ul>
+
+            <h3>2. Bước ngoặt sụp đổ: Cái chết của Quang Trung & Trận Thị Nại</h3>
+            <p>Năm 1792, Quang Trung đột ngột qua đời. Triều đại Tây Sơn dưới thời vua Cảnh Thịnh (Quang Toản) nhanh chóng suy yếu do mâu thuẫn nội bộ thiếu cơ chế kiểm soát/kế nhiệm vững chắc.</p>
+            
+            <div class="highlight-box">
+                <h4>Trận Đại thủy chiến Thị Nại (2/1801)</h4>
+                <p>Là trận hải chiến lớn nhất nội chiến Việt Nam lúc bấy giờ. Tây Sơn huy động hạm đội khổng lồ gồm gần 2.000 thuyền, trong đó có 3 soái hạm <strong>Định Quốc</strong> (mỗi chiếc trang bị hơn 60 hải pháo). Tuy nhiên, Nguyễn Ánh dùng kế đoạt mật lệnh, áp dụng hỏa công thuận chiều gió đã thiêu rụi toàn bộ hạm đội Tây Sơn. Tổn thất lên tới 20.000 quân và 600 đại pháo.</p>
+            </div>
+
+            <p><strong>Kết thúc:</strong> Năm 1802, vua Cảnh Thịnh chạy ra Bắc nhưng bị bắt. Triều Tây Sơn sụp đổ, Nguyễn Ánh lên ngôi, lập ra triều Nguyễn, thừa hưởng một di sản lãnh thổ đã được thống nhất.</p>
+        </div>
+
+        <!-- BÀI HỌC TỔNG KẾT -->
+        <div class="intro-card" style="border-top: 4px solid var(--secondary-color);">
+            <h2>Tổng kết & Bài học Quản trị</h2>
+            
+            <div class="table-responsive">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%;"><strong>Nghệ thuật Chiến lược</strong></td>
+                            <td>Luôn áp dụng nguyên tắc "chọn không gian, chọn thời gian" có lợi (Rạch Gầm, dịp Tết 1789). Lấy "trí" và "mưu" (địch vận, nghi binh) để khắc phục điểm yếu lấy ít địch nhiều. Phối hợp nhịp nhàng các binh chủng (thủy binh, tượng binh, bộ binh, pháo binh).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lãnh đạo & Xã hội</strong></td>
+                            <td>Xác định đúng "điểm nổ" bất bình của xã hội (tham nhũng, sưu thuế) để tạo khẩu hiệu chính trị biến thành sức mạnh vật chất. Dám hợp tác với nhiều tầng lớp, dân tộc khác nhau để huy động nguồn lực tổng hợp.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quản trị Rủi ro</strong></td>
+                            <td>Sự sụp đổ sau 1792 là bài học cay đắng về việc một bộ máy cách mạng phụ thuộc quá lớn vào cá nhân lãnh tụ xuất chúng mà thiếu vắng một cơ chế kế nhiệm và kiểm soát quyền lực nội bộ mang tính thể chế.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align: right; font-style: italic; font-size: 0.9rem; margin-top: 15px; color: var(--text-muted);">
+                *Dữ liệu tổng hợp từ: Bảo tàng Lịch sử Quốc gia, Tạp chí Quốc phòng Toàn dân, Cục Di sản Văn hóa và các nghiên cứu học thuật về thế kỷ 18.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Script vẽ biểu đồ Mermaid -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#ffedd5',
+                primaryBorderColor: '#b45309',
+                primaryTextColor: '#7f1d1d',
+                lineColor: '#9b1c1c',
+                fontFamily: 'Inter'
+            }
+        });
+    </script>
+</body>
+</html>
